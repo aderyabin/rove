@@ -1,0 +1,10 @@
+%form{ :method => 'POST', :action => '/' }
+
+  - Hobo.categories.each do |category|
+    %h2=category.name
+
+    - category.packages.each do |package|
+      %h3
+        %input{ :type=>"checkbox", :name => "packages[]", :value => package.name }= package.title
+
+  %input{ :type => 'submit', :value => 'Generate' }
