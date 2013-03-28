@@ -1,0 +1,5 @@
+%input{ type: "checkbox", value: option.name }= option.title
+- option.selectors.each do |selector|
+  = haml(:_selector, layout: false, locals: {selector: selector})
+- option.options.each do |sub_option|
+  = haml(:_option, layout: false, locals: {option: sub_option })

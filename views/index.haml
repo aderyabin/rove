@@ -2,9 +2,12 @@
 
   - Hobo.categories.each do |category|
     %h2=category.name
-
     - category.packages.each do |package|
-      %h3
-        %input{ :type=>"checkbox", :name => "packages[]", :value => package.name }= package.title
+      %input{ type: "checkbox", name: "packages[]", value: package.name }= package.title
 
-  %input{ :type => 'submit', :value => 'Generate' }
+      - package.selectors.each do |selector|
+        = haml(:_selector, layout: false, locals: {selector: selector})
+      - package.options.each do |sub_option|
+        = haml(:_option, layout: false, locals: {option: sub_option })
+
+  %input{ :type => 'submit', value: 'Generate' }

@@ -1,22 +1,24 @@
 # encoding: utf-8
 
-class Hobo::Category
+module Hobo
+  class Category
 
-  attr_reader :name
+    attr_reader :name
 
-  @@instances = []
+    @@instances = []
 
-  def initialize(name)
-    @name = name
-    @@instances << self unless @@instances.collect(&:name).include?(name)
-  end
+    def initialize(name)
+      @name = name
+      @@instances << self unless @@instances.collect(&:name).include?(name)
+    end
 
-  def self.all
-    @@instances
-  end
+    def self.all
+      @@instances
+    end
 
 
-  def packages
-    Hobo::Package.all.select{ |p| p.category == name }
+    def packages
+      Hobo::Package.all.select{ |p| p.category == name }
+    end
   end
 end
