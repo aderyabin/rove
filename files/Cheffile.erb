@@ -1,7 +1,0 @@
-# encoding: utf-8
-
-site 'http://community.opscode.com/api/v1'
-
-<% cookbooks.each_pair do |name, params| %>
-  cookbook "<%= name %>", <%= params.inspect %>
-<% end %>

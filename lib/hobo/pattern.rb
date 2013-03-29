@@ -1,15 +1,12 @@
-# encoding: utf-8
-
 module Hobo
   class Pattern
-    @@instances  = []
+    include Support::Storer
 
-    def self.all
-      @@instances
-    end
+    attr_reader :name
 
     def initialize(name, &block)
-      @@instances << self
+      @name = name
+      store
     end
   end
 end

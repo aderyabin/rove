@@ -1,12 +1,15 @@
-require "rubygems"
-require "bundler/setup"
-require "sinatra"
-require "haml"
-require "./lib/hobo"
-require "./app"
+require 'sinatra'
+require 'haml'
 
-set :run, false
-set :port, 3000
-set :raise_errors, true
+require './setup'
+
+get '/' do
+  haml :index
+end
+
+post '/' do
+  builder = Hobo::Builder.new(params['packages'])
+  send_file builder.zip, :disposition => :attachment, :filename => 'hobo.zip'
+end
 
 run Sinatra::Application

@@ -1,8 +1,19 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (3.2.13)
+      i18n (= 0.6.1)
+      multi_json (~> 1.0)
+    coderay (1.0.9)
     haml (4.0.1)
       tilt
+    i18n (0.6.1)
+    method_source (0.8.1)
+    multi_json (1.7.2)
+    pry (0.9.12)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -11,12 +22,15 @@ GEM
       rack (~> 1.5, >= 1.5.2)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    slop (3.4.4)
     tilt (1.3.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   haml
+  pry
   rubyzip
   sinatra

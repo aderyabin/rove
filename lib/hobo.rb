@@ -1,4 +1,11 @@
-# encoding: utf-8
+require_relative 'hobo/support/storer'
+require_relative 'hobo/builder'
+require_relative 'hobo/category'
+require_relative 'hobo/cookbook'
+require_relative 'hobo/option'
+require_relative 'hobo/package'
+require_relative 'hobo/pattern'
+require_relative 'hobo/selector'
 
 module Hobo
   class << self
@@ -21,14 +28,9 @@ module Hobo
     def patterns
       Pattern.all
     end
+
+    def load!(path)
+      Dir["#{path.to_s}/*.rb"].each{|f| require f}
+    end
   end
-end
-
-Dir[File.dirname(__FILE__) + "/hobo/*.rb"].each do |file|
-  require file
-end
-
-
-Dir[File.dirname(__FILE__) + "/../packages/*.rb"].each do |file|
-  require file
 end
