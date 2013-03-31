@@ -1,20 +1,14 @@
-# encoding: utf-8
 module Hobo
   class Package < Option
-    @@instances  = []
-
-    def self.all
-      @@instances
-    end
+    include Support::Storer
 
     def initialize(name, &block)
-      @@instances << self
       super
+      store
     end
 
-    def category(name = nil)
-      @category ||= name || 'Other'
-      Hobo::Category.new(@category)
+    def category(name=nil)
+      Hobo::Category.new(@category ||= name || 'Other')
       @category
     end
   end

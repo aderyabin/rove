@@ -1,12 +1,9 @@
-# encoding: utf-8
-# require 'option'
-
 module Hobo
   class Selector
     attr_reader :name, :options
 
     def initialize(name, &block)
-      @name = name
+      @name    = name
       @options = []
 
       instance_eval &block

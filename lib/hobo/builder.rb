@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'erb'
 require 'tempfile'
 require 'zip/zip'
@@ -7,7 +6,7 @@ require 'zip/zipfilesystem'
 module Hobo
   class Builder
     def initialize(params)
-      @packages = Hobo::Package.all.select { |package| params.include?(package.name.to_s)}
+      @packages = Hobo::Package.all.select{ |package| params.include?(package.name.to_s) }
     end
 
     def packages
@@ -19,25 +18,28 @@ module Hobo
     end
 
     def cookbooks
-      @cookbooks ||= packages.inject({}){ |result, package| result.merge package.cookbooks }
+      @cookbooks ||= packages.collect(&:cookbooks).flatten.uniq
     end
 
     def zip
-      tempfile = Tempfile.new('hobo')
-      path = tempfile.path
+      tempfile  = Tempfile.new('hobo')
+      path      = tempfile.path
       cookbooks = self.cookbooks
-      recipes = self.recipes
+      recipes   = self.recipes
 
       Zip::ZipOutputStream.open(tempfile.path) do |z|
-        z.put_next_entry('Vagrantfile')
-        z.print ERB.new(File.read(File.dirname(__FILE__) +"/../../files/Vagrantfile.erb")).result(binding)
-
-        z.put_next_entry('Cheffile')
-        z.print ERB.new(File.read(File.dirname(__FILE__) +"/../../files/Cheffile.erb")).result(binding)
+        %w(Vagrantfile Cheffile).each do |t|
+          z.put_next_entry t
+          z.print ERB.new(template t).result(binding)
+        end
       end
 
       tempfile.close
       path
+    end
+
+    def template(name)
+      File.read(File.dirname(__FILE__) + "/templates/#{name}.erb")
     end
   end
 end

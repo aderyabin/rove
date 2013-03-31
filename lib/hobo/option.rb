@@ -1,16 +1,15 @@
-# encoding: utf-8
-
 module Hobo
   class Option
     attr_reader :name, :config, :cookbooks, :recipes, :options, :config, :selectors
 
     def initialize(name, &block)
-      @name = name
-      @config = config
+      @name      = name
+      @config    = config
       @cookbooks = []
-      @recipes = []
-      @options = []
+      @recipes   = []
+      @options   = []
       @selectors = []
+
       instance_eval(&block)
     end
 
@@ -19,7 +18,7 @@ module Hobo
       @title ||= name || @name.to_s.capitalize
     end
 
-    def cookbook(name, opts ={})
+    def cookbook(name, opts={})
       @cookbooks << Cookbook.new(name, opts)
     end
 
