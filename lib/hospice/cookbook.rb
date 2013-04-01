@@ -1,4 +1,4 @@
-module Hobo
+module Hospice
   class Cookbook
     attr_reader :name, :opts
 

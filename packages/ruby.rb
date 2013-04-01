@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-Hobo.package :ruby do
+Hospice.package :ruby do
   title 'Ruby'
   category 'Languages'
 

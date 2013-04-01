@@ -1,6 +1,6 @@
 require 'active_support/all'
 
-module Hobo
+module Hospice
   module Support
     module Storer extend ActiveSupport::Concern
       included do

@@ -1,4 +1,4 @@
-module Hobo
+module Hospice
   class Pattern
     include Support::Storer
 

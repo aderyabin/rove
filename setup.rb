@@ -1,3 +1,3 @@
-require_relative 'lib/hobo'
+require_relative 'lib/hospice'
 
-Hobo.load! "#{File.dirname(__FILE__)}/packages"
+Hospice.load! "#{File.dirname(__FILE__)}/packages"

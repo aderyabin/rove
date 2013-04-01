@@ -1,4 +1,4 @@
-module Hobo
+module Hospice
   class Option
     attr_reader :name, :config, :cookbooks, :recipes, :options, :config, :selectors
 

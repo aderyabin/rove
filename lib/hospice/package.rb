@@ -1,4 +1,4 @@
-module Hobo
+module Hospice
   class Package < Option
     include Support::Storer
 
@@ -8,7 +8,7 @@ module Hobo
     end
 
     def category(name=nil)
-      Hobo::Category.new(@category ||= name || 'Other')
+      Hospice::Category.new(@category ||= name || 'Other')
       @category
     end
   end

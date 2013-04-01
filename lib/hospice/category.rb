@@ -1,4 +1,4 @@
-module Hobo
+module Hospice
   class Category
     include Support::Storer
 

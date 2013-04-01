@@ -8,8 +8,8 @@ get '/' do
 end
 
 post '/' do
-  builder = Hobo::Builder.new(params['packages'])
-  send_file builder.zip, :disposition => :attachment, :filename => 'hobo.zip'
+  builder = Hospice::Builder.new(params['packages'])
+  send_file builder.zip, :disposition => :attachment, :filename => 'hospice.zip'
 end
 
 run Sinatra::Application

@@ -1,4 +1,4 @@
-module Hobo
+module Hospice
   class Selector
     attr_reader :name, :options
 

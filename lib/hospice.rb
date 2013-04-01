@@ -1,13 +1,13 @@
-require_relative 'hobo/support/storer'
-require_relative 'hobo/builder'
-require_relative 'hobo/category'
-require_relative 'hobo/cookbook'
-require_relative 'hobo/option'
-require_relative 'hobo/package'
-require_relative 'hobo/pattern'
-require_relative 'hobo/selector'
+require_relative 'hospice/support/storer'
+require_relative 'hospice/builder'
+require_relative 'hospice/category'
+require_relative 'hospice/cookbook'
+require_relative 'hospice/option'
+require_relative 'hospice/package'
+require_relative 'hospice/pattern'
+require_relative 'hospice/selector'
 
-module Hobo
+module Hospice
   class << self
     def package(name, &block)
       Package.new(name, &block)

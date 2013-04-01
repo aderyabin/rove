@@ -3,10 +3,10 @@ require 'tempfile'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 
-module Hobo
+module Hospice
   class Builder
     def initialize(params)
-      @packages = Hobo::Package.all.select{ |package| params.include?(package.name.to_s) }
+      @packages = Hospice::Package.all.select{ |package| params.include?(package.name.to_s) }
     end
 
     def packages
@@ -22,7 +22,7 @@ module Hobo
     end
 
     def zip
-      tempfile  = Tempfile.new('hobo')
+      tempfile  = Tempfile.new('hospice')
       path      = tempfile.path
       cookbooks = self.cookbooks
       recipes   = self.recipes
