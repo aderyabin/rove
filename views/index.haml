@@ -40,7 +40,7 @@
                 %a.btn{href: "/?template=LAMP"} LAMP
             .alert.guide
               Select services you would like to enable at a Vagrant box
-            %form{method: 'POST', action: '/'}
+            %form{method: 'POST', action: '/', autocomplete: 'off'}
               - Hospice.categories.each do |category|
                 %input.search-query{type: 'text', placeholder: 'Filter...', data: {category: category.id}}
                 %fieldset
