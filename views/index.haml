@@ -1,13 +1,20 @@
-%form{ :method => 'POST', :action => '/' }
+!!!
+%html
+  %head
+    %title Hospice
+    %link{:href => '/assets/application.css', :rel => 'stylesheet', :type => 'text/css'}
+    %script{:src => '/assets/application.js', :type => 'text/javascript'}
+  %body
+    %form{ :method => 'POST', :action => '/' }
 
-  - Hospice.categories.each do |category|
-    %h2=category.name
-    - category.packages.each do |package|
-      %input{ type: "checkbox", name: "packages[]", value: package.name }= package.title
+      - Hospice.categories.each do |category|
+        %h2=category.name
+        - category.packages.each do |package|
+          %input{ type: "checkbox", name: "packages[]", value: package.name }= package.title
 
-      - package.selectors.each do |selector|
-        = haml(:_selector, layout: false, locals: {selector: selector})
-      - package.options.each do |sub_option|
-        = haml(:_option, layout: false, locals: {option: sub_option })
+          - package.selectors.each do |selector|
+            = haml(:_selector, layout: false, locals: {selector: selector})
+          - package.options.each do |sub_option|
+            = haml(:_option, layout: false, locals: {option: sub_option })
 
-  %input{ :type => 'submit', value: 'Generate' }
+      %input{ :type => 'submit', value: 'Generate' }
