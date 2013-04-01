@@ -1,30 +1,28 @@
 @import "compass";
 @import "bootstrap";
 
-html, body {
-  height: 100%;
-}
-
 #wrap {
-  height: auto !important;
-  margin: 0 auto -60px;
-  min-height: 100%;
+  padding-bottom: 40px;
 }
 
-#footer {
-  height: 60px;
+#call {
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  bottom: 0px;
+  border-top: 1px solid gray;
 
-  .container {
-    border-top: 1px solid #F5F5F5;
+  .row {
+    margin: 5px 0;
+  }
+
+  p {
+    margin: 0;
   }
 }
 
 #search input {
   width: 140px
-}
-
-.credit {
-  margin: 20px 0;
 }
 
 .intro {

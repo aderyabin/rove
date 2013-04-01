@@ -28,6 +28,16 @@
                     %button.btn.btn-success{type: 'submit'} Go
                     %a.btn.btn-danger{href: '/'} Reset
 
+              %p.credit.muted.text-right
+                %small
+                  Presented by
+                  %a{href: 'http://github.com/aderyabin'} @aderyabin
+                  and
+                  %a{href: 'http://github.com/inossidabile'} @inossidabile
+                  %br
+                  Logo picture has been taken from
+                  %a{href: 'http://commons.wikimedia.org/wiki/File:Hospice_Media_Logo.png'} Wikimedia
+
           .span8
             %h2 Generate Vagrant configuration
             .alert.alert-info.guide
@@ -60,15 +70,15 @@
                 %input.input-xlarge{type: 'text', name: 'keyword', placeholder: 'Keyword to store configuration (optional)'}
                 .pull-right
                   %input.btn.btn-primary{type: 'submit', value: 'Generate'}
-    #footer
+    #call
       .container
         .row
           .span12
-            %p.credit.muted.pull-right
-              Logo picture has been taken from
-              %a{href: 'http://commons.wikimedia.org/wiki/File:Hospice_Media_Logo.png'} Wikimedia
-            %p.credit.muted
-              Presented by
-              %a{href: 'http://github.com/aderyabin'} @aderyabin
-              and
-              %a{href: 'http://github.com/inossidabile'} @inossidabile
+            %p.text-center
+              %b Call for arms!
+              Please help us to make this service better by providing additional packages and templates: read
+              %a{href: 'https://github.com/aderyabin/hospice#please-contribute'}instructions at Github
+              to jump in.
+
+    %a{:href => "https://github.com/aderyabin/hospice"}
+      %img{:alt => "Fork me on GitHub", :src => "https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png", :style => "position: absolute; top: 0; right: 0; border: 0;"}/
