@@ -1,21 +1,18 @@
 module Hospice
   class Option
-    attr_reader :name, :config, :cookbooks, :recipes, :options, :config, :selectors
+    attr_reader :id, :package, :name, :config, :cookbooks, :recipes, :options, :config, :selectors
 
-    def initialize(name, &block)
+    def initialize(parent, name, package, &block)
+      @id        = [parent.try(:id), name.underscore].compact.join('-')
       @name      = name
+      @package   = package
       @config    = config
       @cookbooks = []
       @recipes   = []
       @options   = []
       @selectors = []
 
-      instance_eval(&block)
-    end
-
-
-    def title(name = nil)
-      @title ||= name || @name.to_s.capitalize
+      instance_eval &block if block_given?
     end
 
     def cookbook(name, opts={})
@@ -27,7 +24,7 @@ module Hospice
     end
 
     def option(name, &block)
-      @options << Option.new(name, &block)
+      @options << package.ensure_option!(self, name, package, &block)
     end
 
     def config(&block)
@@ -35,7 +32,7 @@ module Hospice
     end
 
     def select(name, &block)
-      @selectors << Selector.new(name, &block)
+      @selectors << Selector.new(self, name, package, &block)
     end
   end
 end

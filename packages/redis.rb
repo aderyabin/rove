@@ -1,6 +1,4 @@
-Hospice.package :redis do
-  title 'Redis'
-  category 'Server'
+Hospice.package 'Redis' => 'Server' do
   cookbook 'redis', :github => 'getaroom/chef-redis'
   recipe 'redis'
 end

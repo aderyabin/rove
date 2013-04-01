@@ -10,7 +10,8 @@ require_relative 'hospice/selector'
 module Hospice
   class << self
     def package(name, &block)
-      Package.new(name, &block)
+      name = {name => nil} unless name.is_a?(Hash)
+      Package.new(name.keys.first, name.values.first, &block)
     end
 
     def template(name, &block)

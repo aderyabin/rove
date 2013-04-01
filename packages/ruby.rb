@@ -1,7 +1,4 @@
-Hospice.package :ruby do
-  title 'Ruby'
-  category 'Languages'
-
+Hospice.package 'Ruby' => 'Languages' do
   select 'Ruby Manager' do
     option 'rvm' do
       cookbook 'rbenv', :github => 'fnichol/chef-rbenv'

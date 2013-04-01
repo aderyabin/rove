@@ -1,6 +1,9 @@
-%div
-  = selector.name
-  - selector.options.each do |option|
-    %input{ type: 'radio' }= option.name
-    - option.options.each do |sub_option|
-      = haml(:_option, layout: false, locals: {option: sub_option })
+%blockquote.group{data: {group: parent.id}}
+  %fieldset
+    %legend= selector.name
+    - selector.options.each do |option|
+      %label.radio
+        %input{name: "selects[#{option.package.id}][#{selector.id}]", type: 'radio', value: option.name, data: {switcher: option.id, selector: selector.id}}
+        = option.name
+      - option.options.each do |sub_option|
+        = haml(:_option, layout: false, locals: {option: sub_option, parent: option})

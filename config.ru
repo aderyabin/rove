@@ -12,6 +12,7 @@ map '/assets' do
   environment = Sprockets::Environment.new
   environment.append_path 'assets/javascripts'
   environment.append_path 'assets/stylesheets'
+  environment.append_path 'assets/images'
   environment.append_path Compass::Frameworks['bootstrap'].templates_directory + '/../vendor/assets/javascripts'
   environment.append_path Compass::Frameworks['bootstrap'].templates_directory + '/../vendor/assets/images'
 
@@ -29,8 +30,9 @@ get '/' do
 end
 
 post '/' do
+  raise params.inspect
   builder = Hospice::Builder.new(params['packages'])
-  send_file builder.zip, :disposition => :attachment, :filename => 'hospice.zip'
+  send_file builder.zip, disposition: :attachment, filename: 'hospice.zip'
 end
 
 run Sinatra::Application

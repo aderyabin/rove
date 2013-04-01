@@ -1,2 +1,61 @@
 @import "compass";
 @import "bootstrap";
+
+html, body {
+  height: 100%;
+}
+
+#wrap {
+  height: auto !important;
+  margin: 0 auto -60px;
+  min-height: 100%;
+}
+
+#footer {
+  height: 60px;
+
+  .container {
+    border-top: 1px solid #F5F5F5;
+  }
+}
+
+#search input {
+  width: 140px
+}
+
+.credit {
+  margin: 20px 0;
+}
+
+.intro {
+  padding-right: 20px;
+}
+
+.form-actions {
+  input {
+    margin-bottom: 0px;
+  }
+}
+
+legend {
+  margin-bottom: 5px;
+}
+
+input.search-query {
+  position: absolute;
+  margin-left: 380px;
+}
+
+.guide {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.templates .btn {
+  margin-bottom: 5px;
+}
+
+.group {
+  display: none;
+  margin-bottom: 0px;
+}

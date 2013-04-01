@@ -1,6 +1,4 @@
-Hospice.package :postgresql do
-  title 'PostgreSQL'
-  category 'Server'
+Hospice.package 'PostgreSQL' => 'Server' do
   cookbook 'postgresql', :github => 'express42-cookbooks/postgresql'
   recipe 'postgresql'
 end

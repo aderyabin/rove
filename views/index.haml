@@ -2,19 +2,77 @@
 %html
   %head
     %title Hospice
-    %link{:href => '/assets/application.css', :rel => 'stylesheet', :type => 'text/css'}
-    %script{:src => '/assets/application.js', :type => 'text/javascript'}
+    %link{href: '/assets/application.css', rel: 'stylesheet', type: 'text/css'}
+    %script{src: '/assets/application.js', type: 'text/javascript'}
   %body
-    %form{ :method => 'POST', :action => '/' }
+    #wrap
+      .container
+        .row
+          .span4
+            .intro
+              %p.text-right
+                %img{src: '/assets/logo.png'}
+              %p.text-right
+                %b Hospice.io
+                is a service that allows you to pregenerate typical Vagrant builds.
+              %p.text-right
+                Use form on the right to enable components you require so we could prepare
+                all the configurations you need.
 
-      - Hospice.categories.each do |category|
-        %h2=category.name
-        - category.packages.each do |package|
-          %input{ type: "checkbox", name: "packages[]", value: package.name }= package.title
+              %form#search{method: 'GET', action: '/'}
+                .well.well-small.text-right
+                  %h5
+                    Load saved configuration:
+                  .input-append
+                    %input{type: 'text', name: 'keyword', placeholder: "Keyword", value: params[:keyword]}
+                    %button.btn.btn-success{type: 'submit'} Go
+                    %a.btn.btn-danger{href: '/'} Reset
 
-          - package.selectors.each do |selector|
-            = haml(:_selector, layout: false, locals: {selector: selector})
-          - package.options.each do |sub_option|
-            = haml(:_option, layout: false, locals: {option: sub_option })
+          .span8
+            %h2 Generate Vagrant configuration
+            .alert.alert-info.guide
+              You can start from choosing one of typical templates
+            .row
+              .span8
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+                %a.btn{href: '#'} Rails
+            .alert.guide
+              Select services you would like to enable at a Vagrant box
+            %form{method: 'POST', action: '/'}
+              - Hospice.categories.each do |category|
+                %input.search-query{type: 'text', placeholder: 'Filter...'}
+                %fieldset
+                  %legend= category.name
+                  - category.packages.each do |package|
+                    %label.checkbox
+                      %input{type: "checkbox", name: "packages[#{package.id}]", value: true, data: {switcher: package.id}}
+                      = package.name
 
-      %input{ :type => 'submit', value: 'Generate' }
+                    - package.selectors.each do |selector|
+                      = haml(:_selector, layout: false, locals: {selector: selector, parent: package})
+                    - package.options.each do |sub_option|
+                      = haml(:_option, layout: false, locals: {option: sub_option, parent: package})
+
+              .form-actions
+                %input.input-xlarge{type: 'text', name: 'keyword', placeholder: 'Keyword to store configuration (optional)'}
+                .pull-right
+                  %input.btn.btn-primary{type: 'submit', value: 'Generate'}
+    #footer
+      .container
+        .row
+          .span12
+            %p.credit.muted.pull-right
+              Logo picture has been taken from
+              %a{href: 'http://commons.wikimedia.org/wiki/File:Hospice_Media_Logo.png'} Wikimedia
+            %p.credit.muted
+              Presented by
+              %a{href: 'http://github.com/aderyabin'} @aderyabin
+              and
+              %a{href: 'http://github.com/inossidabile'}< @inossidabile
