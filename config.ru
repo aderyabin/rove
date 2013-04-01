@@ -30,7 +30,31 @@ get '/' do
 end
 
 post '/' do
-  raise params.inspect
+  if !params['packages']
+    redirect '/'
+    return
+  end
+
+  configuration = {}
+
+  params['packages'].each do |package, _|
+    configuration[package] = []
+
+    if params['selects'] && params['selects'][package]
+      params['selects'][package].each do |_, option|
+        configuration[package] << option
+      end
+    end
+
+    if params['options'] && params['options'][package]
+      params['options'][package].each do |option, _|
+        configuration[package] << option
+      end
+    end
+  end
+
+  raise configuration.inspect
+
   builder = Hospice::Builder.new(params['packages'])
   send_file builder.zip, disposition: :attachment, filename: 'hospice.zip'
 end
