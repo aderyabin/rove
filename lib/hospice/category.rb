@@ -4,6 +4,10 @@ module Hospice
 
     attr_reader :name
 
+    def id
+      object_id
+    end
+
     def initialize(name)
       @name = name
       store :name

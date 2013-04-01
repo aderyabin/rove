@@ -47,18 +47,19 @@
               Select services you would like to enable at a Vagrant box
             %form{method: 'POST', action: '/'}
               - Hospice.categories.each do |category|
-                %input.search-query{type: 'text', placeholder: 'Filter...'}
+                %input.search-query{type: 'text', placeholder: 'Filter...', data: {category: category.id}}
                 %fieldset
                   %legend= category.name
                   - category.packages.each do |package|
-                    %label.checkbox
-                      %input{type: "checkbox", name: "packages[#{package.id}]", value: true, data: {switcher: package.id}}
-                      = package.name
+                    .category{data: {category: category.id}}
+                      %label.checkbox.package
+                        %input{type: "checkbox", name: "packages[#{package.id}]", value: true, data: {switcher: package.id}}
+                        %span= package.name
 
-                    - package.selectors.each do |selector|
-                      = haml(:_selector, layout: false, locals: {selector: selector, parent: package})
-                    - package.options.each do |sub_option|
-                      = haml(:_option, layout: false, locals: {option: sub_option, parent: package})
+                      - package.selectors.each do |selector|
+                        = haml(:_selector, layout: false, locals: {selector: selector, parent: package})
+                      - package.options.each do |sub_option|
+                        = haml(:_option, layout: false, locals: {option: sub_option, parent: package})
 
               .form-actions
                 %input.input-xlarge{type: 'text', name: 'keyword', placeholder: 'Keyword to store configuration (optional)'}
@@ -75,4 +76,4 @@
               Presented by
               %a{href: 'http://github.com/aderyabin'} @aderyabin
               and
-              %a{href: 'http://github.com/inossidabile'}< @inossidabile
+              %a{href: 'http://github.com/inossidabile'} @inossidabile
