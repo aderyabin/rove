@@ -28,9 +28,17 @@
   margin-bottom: 20px;
   padding: 20px;
   background-color: #9C0000;
-  color: white;
-  font-family: 'Gabriela', serif;
   border-radius: 4px;
+
+  a {
+    color: white;
+    font-family: 'Gabriela', serif;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 }
 
 #search input {
