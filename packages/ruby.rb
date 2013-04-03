@@ -1,14 +1,13 @@
 Hospice.package 'Ruby' => 'Languages' do
   select 'Ruby Manager' do
     option 'rvm' do
-      cookbook 'rbenv', :github => 'fnichol/chef-rvm', :ref => 'v0.9.0'
-      recipe 'rbenv::user'
-      recipe 'ruby_build'
+      cookbook 'rvm', :github => 'fnichol/chef-rvm', :ref => 'v0.9.0'
+      recipe 'rvm'
     end
 
     option 'rbenv' do
-      cookbook 'rbenv', :github => 'fnichol/chef-rbenv'
       cookbook 'ruby_build', :github => 'fnichol/chef-ruby_build', :ref => 'v0.7.2'
+      cookbook 'rbenv', :github => 'fnichol/chef-rbenv'
       recipe 'rbenv::user'
       recipe 'ruby_build'
 
