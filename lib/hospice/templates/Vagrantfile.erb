@@ -11,6 +11,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
-    <% recipes.each do |recipe| %>chef.add_recipe '<%= recipe %>'<% end %>
+  <% recipes.each do |recipe| -%>
+  chef.add_recipe '<%= recipe %>'
+  <% end -%>
+  chef.json = <%= configs %>
   end
 end

@@ -2,4 +2,6 @@
 
 site 'http://community.opscode.com/api/v1'
 
-<% cookbooks.each do |cookbook| %>cookbook "<%= cookbook.name %>", <%= cookbook.opts %><% end %>
+<% cookbooks.each do |cookbook| -%>
+cookbook "<%= cookbook.name %>", <%= cookbook.opts %>
+<% end -%>
