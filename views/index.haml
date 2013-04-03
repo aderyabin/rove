@@ -59,10 +59,11 @@
               You can start from choosing one of typical patterns
             .row
               .span8
-                %a.btn{href: "/?pattern=Rails"} Rails
-                %a.btn{href: "/?pattern=Sinatra"} Sinatra
-                %a.btn{href: "/?pattern=Django"} Django
-                %a.btn{href: "/?pattern=LAMP"} LAMP
+                - Hospice::Pattern.all.each do |pattern|
+                  - if @pattern == pattern
+                    %a.btn.btn-success{href: "/?pattern=#{pattern.name}"}= pattern.name
+                  - else
+                    %a.btn{href: "/?pattern=#{pattern.name}"}= pattern.name
             .alert.guide
               Select services you would like to enable at a Vagrant box
             %form{method: 'POST', action: '/', autocomplete: 'off'}
