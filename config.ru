@@ -5,7 +5,7 @@ require 'compass'
 require 'sprockets-sass'
 require 'bootstrap-sass'
 require 'coffee-script'
- 
+
 require './setup'
 
 map '/assets' do
@@ -52,9 +52,7 @@ post '/' do
     end
   end
 
-  raise configuration.inspect
-
-  builder = Hospice::Builder.new(params['packages'])
+  builder = Hospice::Builder.new(configuration)
   send_file builder.zip, disposition: :attachment, filename: 'hospice.zip'
 end
 
