@@ -18,7 +18,7 @@ Hospice.package 'Ruby' => 'Languages' do
               :user_installs => [
                 {
                   :user => 'vagrant',
-                  :rubies => ['1.8.7']
+                  :rubies => ['1.8.7-p371']
                 }
               ]
             }
