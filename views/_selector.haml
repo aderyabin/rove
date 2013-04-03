@@ -1,9 +1,11 @@
-%blockquote.group{data: {group: parent.id}}
+- configuration = @configuration[selector.package.id] || []
+
+%blockquote.group{data: {group: parent.id}, class: ('visible' if visible)}
   %fieldset
     %legend= selector.name
     - selector.options.each do |option|
       %label.radio
-        %input{name: "selects[#{option.package.id}][#{selector.id}]", type: 'radio', value: option.id, data: {switcher: option.id, selector: selector.id}}
+        %input{name: "selects[#{option.package.id}][#{selector.id}]", checked: configuration.include?(option.id), type: 'radio', value: option.id, data: {switcher: option.id, selector: selector.id}}
         = option.name
       - option.options.each do |sub_option|
-        = haml(:_option, layout: false, locals: {option: sub_option, parent: option})
+        = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: configuration.include?(option.id)})

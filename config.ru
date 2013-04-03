@@ -27,8 +27,8 @@ end
 
 get '/' do
   @pattern = Hospice::Pattern.all.select{|p| p.name == params[:pattern]}.first
-  @id = params[:id]
-  @configuration = @pattern.try(:configuration) || Hospice::Builder.find(@id) || {}
+  @configuration = @pattern.try(:configuration) || Hospice::Builder.find(params[:id]) || {}
+  puts @configuration.inspect
   haml :index
 end
 

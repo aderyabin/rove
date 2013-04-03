@@ -25,26 +25,22 @@ module Hospice
     def build_configuration!
       @configuration = {}
       @packages.each_pair do |key, value|
+        key = Option.keywordize(nil, key)
         @configuration[key] = convert_options(value, key)
       end
-    end
-
-
-    def concat(prefix, value)
-      "#{prefix}-#{value}"
     end
 
     def convert_options(value, prefix = "")
       res = []
       if value.is_a?(Hash)
         value.each_pair do |key, values|
-          res << concat(prefix,key)
-          res << convert_options(values, concat(prefix,key))
+          res << Option.keywordize(prefix, key)
+          res << convert_options(values, Option.keywordize(prefix, key))
         end
       elsif value.is_a?(Array)
         value.each{|i| res << convert_options(i, prefix)}
       else
-        res << concat(prefix, value)
+        res << Option.keywordize(prefix, value)
       end
       res.flatten
     end

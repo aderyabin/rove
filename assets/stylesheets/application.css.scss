@@ -110,4 +110,8 @@ input.search-query {
 .group {
   display: none;
   margin-bottom: 0px;
+
+  &.visible {
+    display: block;
+  }
 }

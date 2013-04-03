@@ -60,10 +60,8 @@
             .row
               .span8
                 - Hospice::Pattern.all.each do |pattern|
-                  - if @pattern == pattern
-                    %a.btn.btn-success{href: "/?pattern=#{pattern.name}"}= pattern.name
-                  - else
-                    %a.btn{href: "/?pattern=#{pattern.name}"}= pattern.name
+                  %a.btn{href: "/?pattern=#{pattern.name}", class: ("btn-info" if @pattern == pattern)}
+                    = pattern.name
             .alert.guide
               Select services you would like to enable at a Vagrant box
             %form{method: 'POST', action: '/', autocomplete: 'off'}
@@ -74,13 +72,13 @@
                   - category.packages.each do |package|
                     .category{data: {category: category.id}}
                       %label.checkbox.package
-                        %input{type: "checkbox", name: "packages[#{package.id}]", value: true, data: {switcher: package.id}}
+                        %input{type: "checkbox", checked: (!@configuration[package.id].nil?), name: "packages[#{package.id}]", value: true, data: {switcher: package.id}}
                         %span= package.name
 
                       - package.selectors.each do |selector|
-                        = haml(:_selector, layout: false, locals: {selector: selector, parent: package})
+                        = haml(:_selector, layout: false, locals: {selector: selector, parent: package, visible: !@configuration[package.id].nil?})
                       - package.options.each do |sub_option|
-                        = haml(:_option, layout: false, locals: {option: sub_option, parent: package})
+                        = haml(:_option, layout: false, locals: {option: sub_option, parent: package, visible: !@configuration[package.id].nil?})
 
               .form-actions
                 .pull-right

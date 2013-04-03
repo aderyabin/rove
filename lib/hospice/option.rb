@@ -2,8 +2,12 @@ module Hospice
   class Option
     attr_reader :id, :package, :name, :cookbooks, :recipes, :options, :selectors
 
+    def self.keywordize(prefix, name)
+      [prefix, name.underscore].compact.join('-')
+    end
+
     def initialize(parent, name, package, &block)
-      @id        = [parent.try(:id), name.underscore].compact.join('-')
+      @id        = Option.keywordize(parent.try(:id), name)
       @name      = name
       @package   = package
       @cookbooks = []
