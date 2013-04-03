@@ -121,4 +121,18 @@ input.search-query {
   &.visible {
     display: block;
   }
+
+  .input {
+    display: none;
+    border: 0px;
+    border-bottom: 1px dashed gray;
+    box-shadow: none;
+    transition: none;
+    border-radius: 0px;
+    font-size: 11px;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 5px;
+    margin-left: 4px;
+  }
 }

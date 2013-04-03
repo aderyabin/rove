@@ -48,17 +48,17 @@ post '/' do
   configuration = {}
 
   params['packages'].each do |package, _|
-    configuration[package] = []
+    configuration[package] = {}
 
     if params['selects'] && params['selects'][package]
       params['selects'][package].each do |_, option|
-        configuration[package] << option
+        configuration[package][option] = true
       end
     end
 
     if params['options'] && params['options'][package]
-      params['options'][package].each do |option, _|
-        configuration[package] << option
+      params['options'][package].each do |option, value|
+        configuration[package][option] = value.blank? ? true : value
       end
     end
   end

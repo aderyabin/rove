@@ -15,10 +15,12 @@ module Hospice
 
     def initialize(configuration)
       @configuration = configuration
-      @packages = []
-      @recipes = []
+
+      @packages  = []
+      @recipes   = []
       @cookbooks = []
-      @configs = []
+      @configs   = []
+
       parse_configuration!
     end
 
@@ -80,13 +82,13 @@ module Hospice
     def parse_package!(package)
       @cookbooks << package.cookbooks
       @recipes   << package.recipes
-      @configs   << package.config
+      @configs   << package.configure(nil, @configuration)
 
-      package.recursive_options.each do |option|
-        if @configuration[package.id].include?(option.id)
+      package.settings.each do |option|
+        if @configuration[package.id][option.id]
           @cookbooks << option.cookbooks
           @recipes   << option.recipes
-          @configs   << option.config
+          @configs   << option.configure(@configuration[package.id][option.id], @configuration)
         end
       end
     end

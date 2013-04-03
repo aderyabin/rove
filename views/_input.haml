@@ -1,0 +1,16 @@
+- configuration = @configuration[input.package.id] || []
+
+%blockquote.group{data: {group: parent.id}, class: ('visible' if visible)}
+  %label.checkbox.inline
+    %input{checked: configuration.include?(input.id), type: "checkbox", data: {switcher: input.id}}
+    = input.name
+  %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: true}
+
+  %br{style: 'clear: both'}
+
+  - input.selectors.each do |selector|
+    = haml(:_selector, layout: false, locals: {selector: selector, parent: input, visible: configuration.include?(input.id)})
+  - input.options.each do |sub_option|
+    = haml(:_option, layout: false, locals: {option: sub_option, parent: input, visible: configuration.include?(input.id)})
+  - input.inputs.each do |sub_input|
+    = haml(:_input, layout: false, locals: {input: sub_input, parent: input, visible: configuration.include?(input.id)})

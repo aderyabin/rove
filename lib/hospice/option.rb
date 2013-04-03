@@ -1,6 +1,6 @@
 module Hospice
   class Option
-    attr_reader :id, :package, :name, :cookbooks, :recipes, :options, :selectors
+    attr_reader :id, :package, :name, :cookbooks, :recipes, :options, :inputs, :selectors
 
     def self.keywordize(prefix, name)
       [prefix, name.underscore].compact.join('-')
@@ -13,6 +13,7 @@ module Hospice
       @cookbooks = []
       @recipes   = []
       @options   = []
+      @inputs    = []
       @selectors = []
 
       instance_eval &block if block_given?
@@ -30,9 +31,25 @@ module Hospice
       @options << package.ensure_option!(self, name, package, &block)
     end
 
+    def input(name, &block)
+      @inputs << package.ensure_input!(self, name, package, &block)
+    end
+
     def config(&block)
-      @config = block.call if block_given?
-      @config
+      @config = block
+    end
+
+    def configure(value, configuration)
+      return nil unless @config
+
+      case @config.arity
+      when 0
+        @config.call
+      when 1
+        @config.call value
+      when 2
+        @config.call value, configuration
+      end
     end
 
     def select(name, &block)

@@ -8,8 +8,10 @@ toggle = (element, nesting=0) ->
 
   if element.is(':checked')
     group.slideDown()
+    element.parent().next('[type=text]').removeAttr('disabled').fadeIn()
   else
     group.slideUp()
+    element.parent().next('[type=text]').attr('disabled', 'disabled').fadeOut()
 
   if nesting is 0 && element.is('[type=radio]')
     $("[data-selector=#{selector}]").each -> toggle $(this), nesting+1

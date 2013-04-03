@@ -9,3 +9,5 @@
     = haml(:_selector, layout: false, locals: {selector: selector, parent: option, visible: configuration.include?(option.id)})
   - option.options.each do |sub_option|
     = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: configuration.include?(option.id)})
+  - option.inputs.each do |sub_input|
+    = haml(:_input, layout: false, locals: {input: sub_input, parent: option, visible: configuration.include?(option.id)})

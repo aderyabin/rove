@@ -78,6 +78,8 @@
                         = haml(:_selector, layout: false, locals: {selector: selector, parent: package, visible: !@configuration[package.id].nil?})
                       - package.options.each do |sub_option|
                         = haml(:_option, layout: false, locals: {option: sub_option, parent: package, visible: !@configuration[package.id].nil?})
+                      - package.inputs.each do |input|
+                        = haml(:_input, layout: false, locals: {input: input, parent: package, visible: !@configuration[package.id].nil?})
 
               .form-actions
                 .pull-right
