@@ -25,7 +25,7 @@ module Hospice
     def self.find(id)
       path = File.join(PATH, id)
       return nil unless File.exist?(path)
-      File.open(path, "r") {|f| JSON.load(f)}
+      Builder.new File.open(path, "r"){|f| JSON.load(f)}
     rescue
       nil
     end

@@ -29,6 +29,10 @@
     margin-top: 2px;
   }
 
+  .spiner {
+    display: none;
+  }
+
   .generated {
     display: none;
 
@@ -72,7 +76,8 @@
 }
 
 #search input {
-  width: 140px
+  width: 200px;
+  font-size: 11px;
 }
 
 .intro {
@@ -114,4 +119,8 @@ input.search-query {
   &.visible {
     display: block;
   }
+}
+
+#help {
+  display: none;
 }

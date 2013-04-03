@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sass'
 require 'haml'
 require 'sprockets'
 require 'compass'
@@ -26,10 +27,16 @@ map '/assets' do
 end
 
 get '/' do
-  @pattern = Hospice::Pattern.all.select{|p| p.name == params[:pattern]}.first
-  @configuration = @pattern.try(:configuration) || Hospice::Builder.find(params[:id]) || {}
-  puts @configuration.inspect
+  @pattern = Hospice::Pattern.all.select{|p| p.name == params[:pattern]}.first if params[:pattern]
+
+  @configuration   = @pattern.try(:configuration)
+  @configuration ||= Hospice::Builder.find(params[:id].try(:strip)).try(:configuration)
+  @configuration ||= {}
   haml :index
+end
+
+get '/:id' do
+  send_file Hospice::Builder.find(params[:id]).zip, disposition: :attachment, filename: 'hospice.zip'
 end
 
 post '/' do
@@ -57,7 +64,7 @@ post '/' do
   end
 
   builder = Hospice::Builder.new(configuration)
-  send_file builder.zip, disposition: :attachment, filename: 'hospice.zip'
+  builder.save
 end
 
 run Sinatra::Application

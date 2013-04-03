@@ -29,3 +29,21 @@ filter = (element) ->
 $ ->
   $('[data-switcher]').click -> toggle $(this)
   $('input[data-category]').keyup -> filter $(this)
+
+  $('#data').submit ->
+    $('#id .help, #id .generated').hide()
+    $('#id .spiner').show()
+
+    $.post '/', $(this).serialize(), (result) ->
+      $('#id .spiner').fadeOut ->
+        $('#id .generated .id').text result
+
+        $('#id .generated').fadeIn ->
+
+          $('#help').slideDown ->
+            location.href = "/#{result}"
+
+          $('html, body').animate
+            scrollTop: $('#help').offset().top
+
+    false
