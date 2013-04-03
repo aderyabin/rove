@@ -16,6 +16,10 @@ module Hospice
       @packages[name] = options
     end
 
+    def self.find(name)
+      all.find{|pattern| pattern.name.to_s.downcase == name.to_s.downcase}
+    end
+
     private
 
     def build_configuration!
