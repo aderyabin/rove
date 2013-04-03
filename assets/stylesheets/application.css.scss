@@ -134,5 +134,9 @@ input.search-query {
     margin: 0px;
     margin-top: 5px;
     margin-left: 4px;
+
+    &.visible {
+      display: inline;
+    }
   }
 }

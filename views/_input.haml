@@ -4,7 +4,7 @@
   %label.checkbox.inline
     %input{checked: configuration.include?(input.id), type: "checkbox", data: {switcher: input.id}}
     = input.name
-  %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: true}
+  %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !configuration.include?(input.id), class: ('visible' if configuration.include?(input.id)), value: configuration[input.id]}
 
   %br{style: 'clear: both'}
 

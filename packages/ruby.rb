@@ -1,4 +1,11 @@
 Hospice.package 'Ruby' => 'Languages' do
+  input 'test' do
+    input 'test2'
+
+    config do |value|
+    end
+  end
+
   select 'Ruby Manager' do
     option 'rvm' do
       cookbook 'rvm', :github => 'fnichol/chef-rvm', :ref => 'v0.9.0'
