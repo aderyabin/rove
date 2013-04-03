@@ -6,8 +6,6 @@
     = input.name
   %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !configuration.include?(input.id), class: ('visible' if configuration.include?(input.id)), value: configuration[input.id]}
 
-  %br{style: 'clear: both'}
-
   - input.selectors.each do |selector|
     = haml(:_selector, layout: false, locals: {selector: selector, parent: input, visible: configuration.include?(input.id)})
   - input.options.each do |sub_option|
