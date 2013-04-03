@@ -1,4 +1,5 @@
 # Hospice
+[![Code Climate](https://codeclimate.com/github/aderyabin/hospice.png)](https://codeclimate.com/github/aderyabin/hospice)
 
 ## Usage
 
