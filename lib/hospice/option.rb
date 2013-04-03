@@ -1,12 +1,11 @@
 module Hospice
   class Option
-    attr_reader :id, :package, :name, :config, :cookbooks, :recipes, :options, :config, :selectors
+    attr_reader :id, :package, :name, :cookbooks, :recipes, :options, :selectors
 
     def initialize(parent, name, package, &block)
       @id        = [parent.try(:id), name.underscore].compact.join('-')
       @name      = name
       @package   = package
-      @config    = config
       @cookbooks = []
       @recipes   = []
       @options   = []
@@ -29,6 +28,7 @@ module Hospice
 
     def config(&block)
       @config = block.call if block_given?
+      @config
     end
 
     def select(name, &block)
