@@ -4,9 +4,13 @@ require 'erb'
 require 'tempfile'
 require 'zip/zip'
 require 'zip/zipfilesystem'
+require 'digest/md5'
+require 'json'
 
 module Hospice
   class Builder
+    PATH = 'files'
+
     attr_reader :packages, :recipes, :cookbooks, :configuration, :configs
 
     def initialize(configuration)
@@ -16,6 +20,12 @@ module Hospice
       @cookbooks = []
       @configs = []
       parse_configuration!
+    end
+
+    def self.find(id)
+      path = File.join(PATH, id)
+      return nil unless File.exist?(path)
+      File.open(path, "r") {|f| JSON.load(f)}
     end
 
     def zip
@@ -34,6 +44,16 @@ module Hospice
 
       tempfile.close
       path
+    end
+
+    def save
+      json_text = @configuration.to_json
+      filename = Digest::MD5.hexdigest(json_text)
+      FileUtils.mkdir_p(PATH)
+      file = File.open(File.join(PATH, filename),"w")
+      file.write(json_text)
+      file.close
+      filename
     end
 
     private
