@@ -26,6 +26,8 @@ module Hospice
       path = File.join(PATH, id)
       return nil unless File.exist?(path)
       File.open(path, "r") {|f| JSON.load(f)}
+    rescue
+      nil
     end
 
     def zip

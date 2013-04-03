@@ -26,6 +26,9 @@ map '/assets' do
 end
 
 get '/' do
+  @pattern = Hospice::Pattern.all.select{|p| p.name == params[:pattern]}.first
+  @id = params[:id]
+  @configuration = @pattern.try(:configuration) || Hospice::Builder.find(@id) || {}
   haml :index
 end
 
