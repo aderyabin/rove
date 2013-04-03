@@ -27,7 +27,7 @@
                   %h5
                     Load saved configuration:
                   .input-append
-                    %input{type: 'text', name: 'keyword', placeholder: "Keyword", value: params[:keyword]}
+                    %input{type: 'text', name: 'id', placeholder: "ID", value: params[:keyword]}
                     %button.btn.btn-success{type: 'submit'} Go
                     %a.btn.btn-danger{href: '/'} Reset
 
@@ -72,9 +72,18 @@
                         = haml(:_option, layout: false, locals: {option: sub_option, parent: package})
 
               .form-actions
-                %input.input-xlarge{type: 'text', name: 'keyword', placeholder: 'Keyword to store configuration (optional)'}
                 .pull-right
                   %input.btn.btn-primary{type: 'submit', value: 'Generate'}
+                #id
+                  %span.help{style: 'display: none'}
+                    %i.icon-info-sign
+                    %span.muted An unique ID will be provided for every build you generate
+                  %span.generated
+                    %i.icon-ok-sign
+                    %span.muted Shared ID:
+                    %span.id 54334
+                    %span.muted Refer as:
+                    %a.small{href: ''} http://hospice.io/54334
     #call
       .container
         .row
