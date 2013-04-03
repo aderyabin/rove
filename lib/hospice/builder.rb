@@ -51,10 +51,15 @@ module Hospice
     def save
       json_text = @configuration.to_json
       filename = Digest::MD5.hexdigest(json_text)
-      FileUtils.mkdir_p(PATH)
-      file = File.open(File.join(PATH, filename),"w")
-      file.write(json_text)
-      file.close
+      path = File.join(PATH, filename)
+
+      unless File.exists?(path)
+        FileUtils.mkdir_p(PATH)
+        file = File.open(path,"w")
+        file.write(json_text)
+        file.close
+      end
+
       filename
     end
 
