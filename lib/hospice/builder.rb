@@ -11,30 +11,11 @@ module Hospice
 
     def initialize(configuration)
       @configuration = configuration
-      @packages = Hospice::Package.all.select{|package| @configuration.keys.include?(package.id) }
-
+      @packages = []
       @recipes = []
       @cookbooks = []
       @configs = []
-
-      packages.each do |package|
-        @cookbooks += package.cookbooks
-        @recipes += package.recipes
-        @configs << package.config
-
-
-        package.recursive_options.each do |option|
-          if @configuration[package.id].include?(option.id)
-            @cookbooks += option.cookbooks
-            @recipes += option.recipes
-            @configs << option.config
-          end
-        end
-      end
-
-      @recipes = @recipes.flatten.compact.uniq
-      @cookbooks = @cookbooks.flatten.compact.uniq
-      @configs = @configs.flatten.compact.uniq
+      parse_configuration!
     end
 
     def zip
@@ -53,6 +34,34 @@ module Hospice
 
       tempfile.close
       path
+    end
+
+    private
+
+    def parse_configuration!
+      Hospice::Package.all.each do |package|
+        if @configuration.keys.include?(package.id)
+          @packages << package
+          parse_package!(package)
+        end
+      end
+      @recipes = @recipes.flatten.compact.uniq
+      @cookbooks = @cookbooks.flatten.compact.uniq
+      @configs = @configs.flatten.compact.uniq
+    end
+
+    def parse_package!(package)
+      @cookbooks << package.cookbooks
+      @recipes << package.recipes
+      @configs << package.config
+
+      package.recursive_options.each do |option|
+        if @configuration[package.id].include?(option.id)
+          @cookbooks << option.cookbooks
+          @recipes << option.recipes
+          @configs << option.config
+        end
+      end
     end
 
     def template(name)
