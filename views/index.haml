@@ -94,12 +94,38 @@
                     %span.muted Shared ID:
                     %span.id
 
-              #help.alert.alert-block.alert-success
+              #help.well
                 %h4 How to use
                 %p
-                  Ololo then ololo and then ololo once again. Ta-dam! You are done.
-                %p
-                  This block is supposed to open after the generation is done using `slideDown` effect.
+                  The ZIP file you are downloading contains two files: Vagrantfile and Cheffile.
+
+                %ol
+                  %li
+                    %b Vagrantfile
+                    is a main
+                    %a{href: 'http://vagrantup.com/'} Vagrant
+                    configuration. Typically it is supposed to be placed at the root of your project. Just put it whenever you want your box root should be. Additional documentation can be found
+                    %a{href: 'http://docs.vagrantup.com/v2/vagrantfile/index.html'} here.
+                  %li
+                    %b Cheffile
+                    describes sources of cookbooks we use to provision packages you demanded. It's used by
+                    %a{href: 'https://github.com/applicationsonline/librarian'} Librarian
+                    to download all the cookbooks you need including referenced dependencies. Unless you already have it install it using `gem install librarian` command.
+
+                %p To finalize the setup and run your box you should:
+
+                %ul
+                  %li put both of files to the root of your project (it will be the root of a virtual box)
+                  %li
+                    run 
+                    %code librarian-chef install
+                    to grab required cookbooks
+                  %li
+                    run
+                    %code vagrant up
+                    to download, provision and start your brand new box environment.
+
+
     #call
       .container
         .row

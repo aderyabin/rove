@@ -47,6 +47,8 @@
   h4 {
     margin-bottom: 6px;
   }
+
+  display: none;
 }
 
 .intro {
@@ -119,8 +121,4 @@ input.search-query {
   &.visible {
     display: block;
   }
-}
-
-#help {
-  display: none;
 }
