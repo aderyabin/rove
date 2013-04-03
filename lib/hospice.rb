@@ -14,8 +14,8 @@ module Hospice
       Package.new(name.keys.first, name.values.first, &block)
     end
 
-    def template(name, &block)
-      Template.new(name, &block)
+    def pattern(name, &block)
+      Pattern.new(name, &block)
     end
 
     def packages
