@@ -35,7 +35,7 @@ module Hospice
       path      = tempfile.path
       cookbooks = @cookbooks
       recipes   = @recipes
-      configs = @configs
+      configs   = @configs
 
       Zip::ZipOutputStream.open(tempfile.path) do |z|
         %w(Vagrantfile Cheffile).each do |t|
@@ -72,21 +72,21 @@ module Hospice
           parse_package!(package)
         end
       end
-      @recipes = @recipes.flatten.compact.uniq
+      @recipes   = @recipes.flatten.compact.uniq
       @cookbooks = @cookbooks.flatten.compact.uniq
-      @configs = @configs.flatten.compact.uniq
+      @configs   = @configs.flatten.compact.uniq
     end
 
     def parse_package!(package)
       @cookbooks << package.cookbooks
-      @recipes << package.recipes
-      @configs << package.config
+      @recipes   << package.recipes
+      @configs   << package.config
 
       package.recursive_options.each do |option|
         if @configuration[package.id].include?(option.id)
           @cookbooks << option.cookbooks
-          @recipes << option.recipes
-          @configs << option.config
+          @recipes   << option.recipes
+          @configs   << option.config
         end
       end
     end
