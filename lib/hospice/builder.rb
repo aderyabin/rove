@@ -24,8 +24,7 @@ module Hospice
 
 
         package.recursive_options.each do |option|
-          if configuration[package.id].include?(option.id)
-            p option.config
+          if @configuration[package.id].include?(option.id)
             @cookbooks += option.cookbooks
             @recipes += option.recipes
             @configs << option.config
@@ -41,9 +40,9 @@ module Hospice
     def zip
       tempfile  = Tempfile.new('hospice')
       path      = tempfile.path
-      cookbooks = self.cookbooks
-      recipes   = self.recipes
-      configs = self.configs
+      cookbooks = @cookbooks
+      recipes   = @recipes
+      configs = @configs
 
       Zip::ZipOutputStream.open(tempfile.path) do |z|
         %w(Vagrantfile Cheffile).each do |t|
