@@ -42,8 +42,7 @@ end
 
 post '/' do
   if !params['packages']
-    redirect '/'
-    return
+    return ''
   end
 
   build = {}
