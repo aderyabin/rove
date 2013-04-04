@@ -1,4 +1,7 @@
-Hospice.package 'MySQL' => 'Databases' do
+Hospice.package :mysql do
+  title 'MySQL'
+  category 'Databases'
+
   cookbook 'mysql'
   recipe 'mysql'
 end

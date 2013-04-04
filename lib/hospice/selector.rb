@@ -1,10 +1,10 @@
 module Hospice
   class Selector
-    attr_reader :parent, :package, :name, :options, :inputs
+    attr_reader :parent, :package, :title, :options, :inputs
 
-    def initialize(parent, name, package, &block)
+    def initialize(parent, title, package, &block)
       @parent  = parent
-      @name    = name
+      @title   = title
       @package = package
       @options = []
       @inputs  = []
@@ -16,12 +16,12 @@ module Hospice
       object_id
     end
 
-    def option(name, &block)
-      @options << @package.ensure_option!(parent, name, package, &block)
+    def option(id, &block)
+      @options << @package.ensure_option!(parent, id, package, &block)
     end
 
-    def input(name, &block)
-      @inputs << @package.ensure_input!(parent, name, package, &block)
+    def input(id, &block)
+      @inputs << @package.ensure_input!(parent, id, package, &block)
     end
   end
 end

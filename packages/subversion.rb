@@ -1,4 +1,6 @@
-Hospice.package 'Subversion' => 'Version controls' do
+Hospice.package :subversion do
+  category 'Version Controls'
+
   cookbook 'subversion'
   recipe 'subversion'
 end

@@ -1,14 +1,14 @@
-- configuration = @configuration[input.package.id] || []
+- build = @build[input.package.id] || []
 
 %blockquote.group{data: {group: parent.id}, class: ('visible' if visible)}
   %label.checkbox.inline
-    %input{checked: configuration.include?(input.id), type: "checkbox", data: {switcher: input.id}}
-    = input.name
-  %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !configuration.include?(input.id), class: ('visible' if configuration.include?(input.id)), value: configuration[input.id]}
+    %input{checked: build.include?(input.id), type: "checkbox", data: {switcher: input.id}}
+    = input.title
+  %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !build.include?(input.id), class: ('visible' if build.include?(input.id)), value: build[input.id]}
 
   - input.selectors.each do |selector|
-    = haml(:_selector, layout: false, locals: {selector: selector, parent: input, visible: configuration.include?(input.id)})
+    = haml(:_selector, layout: false, locals: {selector: selector, parent: input, visible: build.include?(input.id)})
   - input.options.each do |sub_option|
-    = haml(:_option, layout: false, locals: {option: sub_option, parent: input, visible: configuration.include?(input.id)})
+    = haml(:_option, layout: false, locals: {option: sub_option, parent: input, visible: build.include?(input.id)})
   - input.inputs.each do |sub_input|
-    = haml(:_input, layout: false, locals: {input: sub_input, parent: input, visible: configuration.include?(input.id)})
+    = haml(:_input, layout: false, locals: {input: sub_input, parent: input, visible: build.include?(input.id)})

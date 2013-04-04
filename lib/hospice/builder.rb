@@ -11,25 +11,40 @@ module Hospice
   class Builder
     PATH = 'files'
 
-    attr_reader :packages, :recipes, :cookbooks, :configuration, :configs
+    attr_reader :packages, :recipes, :cookbooks, :build, :config
 
-    def initialize(configuration)
-      @configuration = configuration
+    class << self
+      def [](id)
+        path  = File.join(PATH, id)
+        build = JSON.load(File.read(path))
+        Builder.new(build)
+      end
 
-      @packages  = []
-      @recipes   = []
-      @cookbooks = []
-      @configs   = []
+      def <<(build)
+        json_text = build.to_json
+        filename = Digest::MD5.hexdigest(json_text)
+        path = File.join(PATH, filename)
 
-      parse_configuration!
+        unless File.exists?(path)
+          FileUtils.mkdir_p(PATH)
+          file = File.open(path,"w")
+          file.write(json_text)
+          file.close
+        end
+
+        filename
+      end
     end
 
-    def self.find(id)
-      path = File.join(PATH, id)
-      return nil unless File.exist?(path)
-      Builder.new File.open(path, "r"){|f| JSON.load(f)}
-    rescue
-      nil
+    def initialize(build)
+      @build = build.with_indifferent_access
+
+      @packages   = []
+      @recipes    = []
+      @cookbooks  = []
+      @config     = {}
+
+      parse_build!
     end
 
     def zip
@@ -37,7 +52,7 @@ module Hospice
       path      = tempfile.path
       cookbooks = @cookbooks
       recipes   = @recipes
-      configs   = @configs
+      config    = @config
 
       Zip::ZipOutputStream.open(tempfile.path) do |z|
         %w(Vagrantfile Cheffile).each do |t|
@@ -50,47 +65,29 @@ module Hospice
       path
     end
 
-    def save
-      json_text = @configuration.to_json
-      filename = Digest::MD5.hexdigest(json_text)
-      path = File.join(PATH, filename)
-
-      unless File.exists?(path)
-        FileUtils.mkdir_p(PATH)
-        file = File.open(path,"w")
-        file.write(json_text)
-        file.close
-      end
-
-      filename
-    end
-
     private
 
-    def parse_configuration!
+    def parse_build!
       Hospice::Package.all.each do |package|
-        if @configuration.keys.include?(package.id)
-          @packages << package
-          parse_package!(package)
-        end
+        parse_package!(package) if @build.include?(package.id)
       end
-      @recipes   = @recipes.flatten.compact.uniq
-      @cookbooks = @cookbooks.flatten.compact.uniq
-      @configs   = @configs.flatten.compact.uniq
     end
 
     def parse_package!(package)
-      @cookbooks << package.cookbooks
-      @recipes   << package.recipes
-      @configs   << package.configure(nil, @configuration)
+      @packages  << package
+      @cookbooks += package.cookbooks
+      @recipes   += package.recipes
+      @config.deep_merge! package.configure(@build, @config)
 
       package.settings.each do |option|
-        if @configuration[package.id][option.id]
-          @cookbooks << option.cookbooks
-          @recipes   << option.recipes
-          @configs   << option.configure(@configuration[package.id][option.id], @configuration)
+        if @build[package.id].include?(option.id)
+          @cookbooks += option.cookbooks
+          @recipes   += option.recipes
+          @config.deep_merge! option.configure(@build[package.id][option.id], @build, @config)
         end
       end
+
+      config = package.finalize(config)
     end
 
     def template(name)

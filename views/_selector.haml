@@ -1,13 +1,13 @@
-- configuration = @configuration[selector.package.id] || []
+- build = @build[selector.package.id] || []
 
 %blockquote.group{data: {group: parent.id}, class: ('visible' if visible)}
   %fieldset
-    %legend= selector.name
+    %legend= selector.title
     - selector.options.each do |option|
       %label.radio
-        %input{name: "selects[#{option.package.id}][#{selector.id}]", checked: configuration.include?(option.id), type: 'radio', value: option.id, data: {switcher: option.id, selector: selector.id}}
-        = option.name
+        %input{name: "selects[#{option.package.id}][#{selector.id}]", checked: build.include?(option.id), type: 'radio', value: option.id, data: {switcher: option.id, selector: selector.id}}
+        = option.title
       - option.options.each do |sub_option|
-        = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: configuration.include?(option.id)})
+        = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: build.include?(option.id)})
       - option.inputs.each do |sub_input|
-        = haml(:_input, layout: false, locals: {input: sub_input, parent: option, visible: configuration.include?(option.id)})
+        = haml(:_input, layout: false, locals: {input: sub_input, parent: option, visible: build.include?(option.id)})

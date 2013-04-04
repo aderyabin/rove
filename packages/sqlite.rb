@@ -1,4 +1,7 @@
-Hospice.package 'SQLite' => 'Databases' do
+Hospice.package :sqlite do
+  title 'SQLite'
+  category 'Databases'
+
   cookbook 'sqlite'
   recipe 'sqlite'
 end

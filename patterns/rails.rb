@@ -1,6 +1,8 @@
-Hospice.pattern 'Rails' do
-  package 'Ruby', 'rbenv' => '1.9.3'
-  package 'PostgreSQL'
-  package 'Redis'
-  package 'Git'
+Hospice.pattern :rails do
+  title 'Rails'
+
+  package 'ruby', 'rbenv', 'rbenv_193', 'rbenv_200'
+  package :postgresql
+  package :redis
+  package :git
 end

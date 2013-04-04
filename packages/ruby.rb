@@ -1,45 +1,53 @@
-Hospice.package 'Ruby' => 'Languages' do
+Hospice.package :ruby do
+  category 'Languages'
+
   select 'Ruby Manager' do
-    option 'rvm' do
+    option :rvm do
+      title 'RVM'
+
       cookbook 'rvm', :github => 'fnichol/chef-rvm', :ref => 'v0.9.0'
       recipe 'rvm'
     end
 
-    option 'rbenv' do
+    option :rbenv do
+      title 'rbenv'
+
       cookbook 'ruby_build', :github => 'fnichol/chef-ruby_build', :ref => 'v0.7.2'
       cookbook 'rbenv', :github => 'fnichol/chef-rbenv'
       recipe 'rbenv::user'
       recipe 'ruby_build'
 
-      option '1.9.3' do
-        config do
-          {
-            :rbenv => {
-              :user_installs => [
-                {
-                  :user => 'vagrant',
-                  :rubies => ['1.8.7-p371']
-                }
-              ]
-            }
-          }
+      option :rbenv_193 do
+        title '1.9.3'
+
+        config do |_, _, config|
+          inject_rbenv_ruby(config, '1.9.3-p392')
         end
       end
 
-      option '2.0.0' do
-        config do
-          {
-            :rbenv => {
-              :user_installs => [
-                {
-                  :user => 'vagrant',
-                  :rubies => ['2.0.0p0']
-                }
-              ]
-            }
-          }
+      option :rbenv_200 do
+        title '2.0.0'
+
+        config do |_, _, config|
+          inject_rbenv_ruby(config, '2.0.0-p0')
         end
       end
     end
+  end
+
+  def inject_rbenv_ruby(config, ruby)
+    config[:rbenv][:user_installs][0][:rubies] += [ruby]
+    {}
+  rescue
+    {
+      rbenv: {
+        user_installs: [
+          {
+            user:   'vagrant',
+            rubies: [ruby]
+          }
+        ]
+      }
+    }
   end
 end

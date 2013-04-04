@@ -2,47 +2,40 @@ module Hospice
   class Pattern
     include Support::Storer
 
-    attr_reader :name, :packages, :configuration
+    attr_reader :id, :packages, :build
 
-    def initialize(name, &block)
-      @name = name
+    class << self
+      def [](id)
+        id = id.to_sym; Pattern.all.select{|x| x.id == id}.first
+      end
+    end
+
+    def initialize(id, &block)
+      @id       = id.to_sym
+      @title    = id.to_s.humanize
       @packages = {}
-      store
+
       instance_eval &block if block_given?
-      build_configuration!
+      store
     end
 
-    def package(name, options = {})
-      @packages[name] = options
+    def title(title=false)
+      return @title unless title
+      @title = title
     end
 
-    def self.find(name)
-      all.find{|pattern| pattern.name.to_s.downcase == name.to_s.downcase}
-    end
+    def package(id, *options)
+      options = options[0] if options[0].is_a?(Hash)
 
-    private
-
-    def build_configuration!
-      @configuration = {}
-      @packages.each_pair do |key, value|
-        key = Option.keywordize(nil, key)
-        @configuration[key] = convert_options(value, key)
+      if options.is_a?(Array)
+        options = Hash[*options.map{|x| [x,nil]}.flatten]
       end
+
+      @packages[id] = options
     end
 
-    def convert_options(value, prefix = "")
-      res = []
-      if value.is_a?(Hash)
-        value.each_pair do |key, values|
-          res << Option.keywordize(prefix, key)
-          res << convert_options(values, Option.keywordize(prefix, key))
-        end
-      elsif value.is_a?(Array)
-        value.each{|i| res << convert_options(i, prefix)}
-      else
-        res << Option.keywordize(prefix, value)
-      end
-      res.flatten
+    def build
+      @packages.with_indifferent_access
     end
   end
 end

@@ -27,16 +27,17 @@ map '/assets' do
 end
 
 get '/' do
-  @pattern = Hospice::Pattern.all.select{|p| p.name == params[:pattern]}.first if params[:pattern]
+  @pattern = Hospice::Pattern[params[:pattern]] if params[:pattern]
 
-  @configuration   = @pattern.try(:configuration)
-  @configuration ||= Hospice::Builder.find(params[:id].try(:strip)).try(:configuration)
-  @configuration ||= {}
+  @build   = @pattern.try(:build)
+  @build ||= Hospice::Builder[params[:id].try(:strip)].try(:build)
+  @build ||= {}
+
   haml :index
 end
 
 get '/:id' do
-  send_file Hospice::Builder.find(params[:id]).zip, disposition: :attachment, filename: 'hospice.zip'
+  send_file Hospice::Builder[params[:id]].zip, disposition: :attachment, filename: 'hospice.zip'
 end
 
 post '/' do
@@ -45,26 +46,25 @@ post '/' do
     return
   end
 
-  configuration = {}
+  build = {}
 
   params['packages'].each do |package, _|
-    configuration[package] = {}
+    build[package] = {}
 
     if params['selects'] && params['selects'][package]
       params['selects'][package].each do |_, option|
-        configuration[package][option] = true
+        build[package][option] = true
       end
     end
 
     if params['options'] && params['options'][package]
       params['options'][package].each do |option, value|
-        configuration[package][option] = value.blank? ? true : value
+        build[package][option] = value.blank? ? true : value
       end
     end
   end
 
-  builder = Hospice::Builder.new(configuration)
-  builder.save
+  Hospice::Builder << build
 end
 
 run Sinatra::Application

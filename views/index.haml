@@ -59,27 +59,27 @@
             .row
               .span8
                 - Hospice::Pattern.all.each do |pattern|
-                  %a.btn{href: "/?pattern=#{pattern.name}", class: ("btn-info" if @pattern == pattern)}
-                    = pattern.name
+                  %a.btn{href: "/?pattern=#{pattern.id}", class: ("btn-info" if @pattern == pattern)}
+                    = pattern.title
             .alert.guide
               Select services you would like to enable at a Vagrant box
             %form#data{method: 'POST', action: '/', autocomplete: 'off'}
               - Hospice.categories.each do |category|
                 %input.search-query{type: 'text', placeholder: 'Filter...', data: {category: category.id}}
                 %fieldset
-                  %legend= category.name
+                  %legend= category.title
                   - category.packages.each do |package|
                     .category{data: {category: category.id}}
                       %label.checkbox.package
-                        %input{type: "checkbox", checked: (!@configuration[package.id].nil?), name: "packages[#{package.id}]", value: true, data: {switcher: package.id}}
-                        %span= package.name
+                        %input{type: "checkbox", checked: (!@build[package.id].nil?), name: "packages[#{package.id}]", value: true, data: {switcher: package.id}}
+                        %span= package.title
 
                       - package.selectors.each do |selector|
-                        = haml(:_selector, layout: false, locals: {selector: selector, parent: package, visible: !@configuration[package.id].nil?})
+                        = haml(:_selector, layout: false, locals: {selector: selector, parent: package, visible: !@build[package.id].nil?})
                       - package.options.each do |sub_option|
-                        = haml(:_option, layout: false, locals: {option: sub_option, parent: package, visible: !@configuration[package.id].nil?})
+                        = haml(:_option, layout: false, locals: {option: sub_option, parent: package, visible: !@build[package.id].nil?})
                       - package.inputs.each do |input|
-                        = haml(:_input, layout: false, locals: {input: input, parent: package, visible: !@configuration[package.id].nil?})
+                        = haml(:_input, layout: false, locals: {input: input, parent: package, visible: !@build[package.id].nil?})
 
               .form-actions
                 .pull-right

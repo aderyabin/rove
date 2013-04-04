@@ -1,4 +1,7 @@
-Hospice.package 'PHP' => 'Languages' do
+Hospice.package :php do
+  title 'PHP'
+  category 'Languages'
+
   cookbook 'php'
   recipe 'php'
 end

@@ -2,19 +2,26 @@ module Hospice
   class Category
     include Support::Storer
 
-    attr_reader :name
+    attr_reader :title
+
+    def self.build(title)
+      instance = all.select{|x| x.title == title}.first
+      instance || Category.new(title)
+    end
 
     def id
       object_id
     end
 
-    def initialize(name)
-      @name = name
-      store :name
+    def packages
+      Package.all.select{|p| p.category.id == id}
     end
 
-    def packages
-      Package.all.select{ |p| p.category == name }
+    private
+
+    def initialize(title)
+      @title = title
+      store
     end
   end
 end

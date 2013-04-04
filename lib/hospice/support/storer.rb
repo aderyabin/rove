@@ -13,19 +13,13 @@ module Hospice
           instances
         end
 
-        def store(entry, uniqueness=false)
-          if uniqueness
-            uniqueness = !all.map{|x| x.send uniqueness}.include?(entry.send uniqueness)
-          else
-            uniqueness = true
-          end
-
-          instances << entry if uniqueness
+        def store(entry)
+          instances << entry
         end
       end
 
-      def store(uniqueness=false)
-        self.class.store(self, uniqueness)
+      def store
+        self.class.store(self)
       end
     end
   end

@@ -1,13 +1,13 @@
-- configuration = @configuration[option.package.id] || []
+- build = @build[option.package.id] || []
 
 %blockquote.group{data: {group: parent.id}, class: ('visible' if visible)}
   %label.checkbox.inline
-    %input{name: "options[#{option.package.id}][#{option.id}]", checked: configuration.include?(option.id), type: "checkbox", value: true, data: {switcher: option.id}}
-    = option.name
+    %input{name: "options[#{option.package.id}][#{option.id}]", checked: build.include?(option.id), type: "checkbox", value: true, data: {switcher: option.id}}
+    = option.title
 
   - option.selectors.each do |selector|
-    = haml(:_selector, layout: false, locals: {selector: selector, parent: option, visible: configuration.include?(option.id)})
+    = haml(:_selector, layout: false, locals: {selector: selector, parent: option, visible: build.include?(option.id)})
   - option.options.each do |sub_option|
-    = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: configuration.include?(option.id)})
+    = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: build.include?(option.id)})
   - option.inputs.each do |sub_input|
-    = haml(:_input, layout: false, locals: {input: sub_input, parent: option, visible: configuration.include?(option.id)})
+    = haml(:_input, layout: false, locals: {input: sub_input, parent: option, visible: build.include?(option.id)})

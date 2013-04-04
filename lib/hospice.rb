@@ -10,13 +10,12 @@ require_relative 'hospice/selector'
 
 module Hospice
   class << self
-    def package(name, &block)
-      name = {name => nil} unless name.is_a?(Hash)
-      Package.new(name.keys.first, name.values.first, &block)
+    def package(id, &block)
+      Package.new(id, &block)
     end
 
-    def pattern(name, &block)
-      Pattern.new(name, &block)
+    def pattern(title, &block)
+      Pattern.new(title, &block)
     end
 
     def packages
@@ -33,6 +32,10 @@ module Hospice
 
     def load!(path)
       Dir["#{path.to_s}/*.rb"].each{|f| require f}
+    end
+
+    def [](id)
+      Package[id]
     end
   end
 end

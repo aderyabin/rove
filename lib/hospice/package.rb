@@ -2,36 +2,70 @@ module Hospice
   class Package < Option
     include Support::Storer
 
-    attr_reader :category, :settings
+    attr_reader :settings
 
-    def initialize(name, category, &block)
+    class << self
+      def [](id)
+        id = id.to_sym; Package.all.select{|x| x.id == id}.first
+      end
+    end
+
+    def [](id)
+      id = id.to_sym; @settings.select{|x| x.id == id}.first
+    end
+
+    def initialize(id, &block)
       @settings = []
-      super(nil, name, self, &block)
-      Hospice::Category.new(@category ||= category || 'Other')
-
+      super(nil, id, self, &block)
+      raise "You should set category for #{@id} package" if @category.blank?
       store
     end
 
-    def ensure_option!(parent, name, package, &block)
-      option = Option.new(parent, name, package, &block)
-
-      if @settings.map{|x| x.id}.include?(option.id)
-        raise "Setting '#{option.id}' is taken within '#{@name}'!"
-      end
-
-      @settings << option
-      option
+    def category(title=false)
+      return @category unless title
+      @category = Hospice::Category.build(title)
     end
 
-    def ensure_input!(parent, name, package, &block)
-      input = Input.new(parent, name, package, &block)
+    def finalizer(&block)
+      @finalizer = block
+    end
 
-      if @settings.map{|x| x.id}.include?(input.id)
-        raise "Setting '#{input.id}' is taken within '#{@name}'!"
+    def finalize(config)
+      return config unless @finalizer
+      @finalizer.call(config)
+    end
+
+    def configure(build, config)
+      return {} unless @config
+
+      result = case @config.arity
+      when 0
+        @config.call
+      when 1
+        @config.call build
+      when 2
+        @config.call build, config
       end
 
-      @settings << input
-      input
+      result = {} unless result.is_a?(Hash)
+      result
+    end
+
+    def ensure_option!(parent, id, package, &block)
+      ensure! Option.new(parent, id, package, &block)
+    end
+
+    def ensure_input!(parent, id, package, &block)
+      ensure! Input.new(parent, id, package, &block)
+    end
+
+    def ensure!(entity)
+      if @settings.map{|x| x.id}.include?(entity.id)
+        raise "Setting '#{entity.id}' is taken within '#{@id}'!"
+      end
+
+      @settings << entity
+      entity
     end
   end
 end

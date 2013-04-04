@@ -1,4 +1,6 @@
-Hospice.package 'Apache' => 'Servers' do
+Hospice.package :apache do
+  category 'Web-Servers'
+
   cookbook 'apache'
   recipe 'apache'
 end
