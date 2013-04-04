@@ -49,9 +49,9 @@ module Hospice
       when 1
         package.instance_exec value, &@config
       when 2
-        package.instance_exec value, build, &@config
+        package.instance_exec value, config, &@config
       when 3
-        package.instance_exec value, build, config, &@config
+        package.instance_exec value, config, build, &@config
       end
 
       result = {} unless result.is_a?(Hash)

@@ -42,9 +42,9 @@ module Hospice
       when 0
         @config.call
       when 1
-        @config.call build
+        @config.call config
       when 2
-        @config.call build, config
+        @config.call config, build
       end
 
       result = {} unless result.is_a?(Hash)
