@@ -40,18 +40,16 @@ module Hospice
       @config = block
     end
 
-    def configure(value, build, config)
+    def configure(value, config, build)
       return {} unless @config
 
       result = case @config.arity
       when 0
         package.instance_eval &@config
       when 1
-        package.instance_exec value, &@config
+        package.instance_exec config, &@config
       when 2
-        package.instance_exec value, config, &@config
-      when 3
-        package.instance_exec value, config, build, &@config
+        package.instance_exec config, build, &@config
       end
 
       result = {} unless result.is_a?(Hash)

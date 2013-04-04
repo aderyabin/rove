@@ -79,13 +79,13 @@ module Hospice
       @packages  << package
       @cookbooks += package.cookbooks
       @recipes   += package.recipes
-      @config.deep_merge! package.configure(@build, @config)
+      @config.deep_merge! package.configure(@config, @build)
 
       package.settings.each do |option|
         if @build[package.id].include?(option.id)
           @cookbooks += option.cookbooks
           @recipes   += option.recipes
-          @config.deep_merge! option.configure(@build[package.id][option.id], @build, @config)
+          @config.deep_merge! option.configure(@build[package.id][option.id], @config, @build)
         end
       end
 

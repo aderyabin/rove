@@ -35,7 +35,7 @@ module Hospice
       @finalizer.call(config)
     end
 
-    def configure(build, config)
+    def configure(config, build)
       return {} unless @config
 
       result = case @config.arity

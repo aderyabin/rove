@@ -20,7 +20,7 @@ Hospice.package :ruby do
       option :rbenv_193 do
         title '1.9.3'
 
-        config do |_, config|
+        config do |config|
           inject_rbenv_ruby(config, '1.9.3-p392')
         end
       end
@@ -28,7 +28,7 @@ Hospice.package :ruby do
       option :rbenv_200 do
         title '2.0.0'
 
-        config do |_, config|
+        config do |config|
           inject_rbenv_ruby(config, '2.0.0-p0')
         end
       end
