@@ -18,6 +18,8 @@ module Hospice
         path  = File.join(PATH, id)
         build = JSON.load(File.read(path))
         Builder.new(build)
+      rescue
+        nil
       end
 
       def <<(build)
