@@ -1,4 +1,4 @@
-require 'sinatra'
+require 'scorched'
 require 'sass'
 require 'haml'
 require 'sprockets'
@@ -26,44 +26,46 @@ map '/assets' do
   run environment
 end
 
-get '/' do
-  @pattern = Hospice::Pattern[params[:pattern]] if params[:pattern]
+class Application < Scorched::Controller
+  get '/' do
+    @pattern = Hospice::Pattern[request[:pattern]] if request[:pattern]
 
-  @build   = @pattern.try(:build)
-  @build ||= Hospice::Builder[params[:id].try(:strip)].try(:build)
-  @build ||= {}
+    @build   = @pattern.try(:build)
+    @build ||= Hospice::Builder[request[:id].try(:strip)].try(:build)
+    @build ||= {}
 
-  haml :index
-end
-
-get '/:id' do
-  send_file Hospice::Builder[params[:id]].zip, disposition: :attachment, filename: 'hospice.zip'
-end
-
-post '/' do
-  if !params['packages']
-    return ''
+    render :'index.haml'
   end
 
-  build = {}
+  get '/:id' do
+    send_file Hospice::Builder[request.captures[:id]].zip, disposition: :attachment, filename: 'hospice.zip'
+  end
 
-  params['packages'].each do |package, _|
-    build[package] = {}
+  post '/' do
+    if !request['packages']
+      return ''
+    end
 
-    if params['selects'] && params['selects'][package]
-      params['selects'][package].each do |_, option|
-        build[package][option] = true
+    build = {}
+
+    request['packages'].each do |package, _|
+      build[package] = {}
+
+      if request['selects'] && request['selects'][package]
+        request['selects'][package].each do |_, option|
+          build[package][option] = true
+        end
+      end
+
+      if request['options'] && request['options'][package]
+        request['options'][package].each do |option, value|
+          build[package][option] = value.blank? ? true : value
+        end
       end
     end
 
-    if params['options'] && params['options'][package]
-      params['options'][package].each do |option, value|
-        build[package][option] = value.blank? ? true : value
-      end
-    end
+    Hospice::Builder << build
   end
-
-  Hospice::Builder << build
 end
 
-run Sinatra::Application
+run Application

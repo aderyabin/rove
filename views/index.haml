@@ -28,7 +28,7 @@
                   %h5
                     Load saved configuration:
                   .input-append
-                    %input{type: 'text', name: 'id', placeholder: "ID", value: params[:id]}
+                    %input{type: 'text', name: 'id', placeholder: "ID", value: request[:id]}
                     %button.btn.btn-success{type: 'submit'} Go
 
               %p.muted.text-right
@@ -50,7 +50,7 @@
                   Hosted at
                   %a{href: 'http://www.heroku.com'} Heroku
                   and served with
-                  %a{href: 'http://www.sinatrarb.com/'} Sinatra
+                  %a{href: 'http://www.scorchedrb.com/'} Scorched
 
           .span8
             %h2 Generate Vagrant configuration
@@ -75,11 +75,11 @@
                         %span= package.title
 
                       - package.selectors.each do |selector|
-                        = haml(:_selector, layout: false, locals: {selector: selector, parent: package, visible: !@build[package.id].nil?})
+                        = render(:'_selector.haml', layout: false, locals: {selector: selector, parent: package, visible: !@build[package.id].nil?})
                       - package.options.each do |sub_option|
-                        = haml(:_option, layout: false, locals: {option: sub_option, parent: package, visible: !@build[package.id].nil?})
+                        = render(:'_option.haml', layout: false, locals: {option: sub_option, parent: package, visible: !@build[package.id].nil?})
                       - package.inputs.each do |input|
-                        = haml(:_input, layout: false, locals: {input: input, parent: package, visible: !@build[package.id].nil?})
+                        = render(:'_input.haml', layout: false, locals: {input: input, parent: package, visible: !@build[package.id].nil?})
 
               .form-actions
                 .pull-right

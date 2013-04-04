@@ -7,8 +7,8 @@
   %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !build.include?(input.id), class: ('visible' if build.include?(input.id)), value: build[input.id]}
 
   - input.selectors.each do |selector|
-    = haml(:_selector, layout: false, locals: {selector: selector, parent: input, visible: build.include?(input.id)})
+    = render(:'_selector.haml', layout: false, locals: {selector: selector, parent: input, visible: build.include?(input.id)})
   - input.options.each do |sub_option|
-    = haml(:_option, layout: false, locals: {option: sub_option, parent: input, visible: build.include?(input.id)})
+    = render(:'_option.haml', layout: false, locals: {option: sub_option, parent: input, visible: build.include?(input.id)})
   - input.inputs.each do |sub_input|
-    = haml(:_input, layout: false, locals: {input: sub_input, parent: input, visible: build.include?(input.id)})
+    = render(:'_input.haml', layout: false, locals: {input: sub_input, parent: input, visible: build.include?(input.id)})

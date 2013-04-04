@@ -6,8 +6,8 @@
     = option.title
 
   - option.selectors.each do |selector|
-    = haml(:_selector, layout: false, locals: {selector: selector, parent: option, visible: build.include?(option.id)})
+    = render(:'_selector.haml', layout: false, locals: {selector: selector, parent: option, visible: build.include?(option.id)})
   - option.options.each do |sub_option|
-    = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: build.include?(option.id)})
+    = render(:'_option.haml', layout: false, locals: {option: sub_option, parent: option, visible: build.include?(option.id)})
   - option.inputs.each do |sub_input|
-    = haml(:_input, layout: false, locals: {input: sub_input, parent: option, visible: build.include?(option.id)})
+    = render(:'_input.haml', layout: false, locals: {input: sub_input, parent: option, visible: build.include?(option.id)})

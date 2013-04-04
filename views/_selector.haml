@@ -8,6 +8,6 @@
         %input{name: "selects[#{option.package.id}][#{selector.id}]", checked: build.include?(option.id), type: 'radio', value: option.id, data: {switcher: option.id, selector: selector.id}}
         = option.title
       - option.options.each do |sub_option|
-        = haml(:_option, layout: false, locals: {option: sub_option, parent: option, visible: build.include?(option.id)})
+        = render(:'_option.haml', layout: false, locals: {option: sub_option, parent: option, visible: build.include?(option.id)})
       - option.inputs.each do |sub_input|
-        = haml(:_input, layout: false, locals: {input: sub_input, parent: option, visible: build.include?(option.id)})
+        = render(:'_input.haml', layout: false, locals: {input: sub_input, parent: option, visible: build.include?(option.id)})
