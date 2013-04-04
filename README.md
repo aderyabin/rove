@@ -74,7 +74,7 @@ end
 
 As you can see you can freely nest options in any order. Note however that **options have to have unique keywords in the context of package** no matter how deeply they nested.
 
-Sometimes you might want to get some custom textual user input. It's possible with `input` method. It behaves absolutely same with `option`.
+Sometimes you might want to get some custom textual user input. It's possible with `input` method. It behaves absolutely identical to `option`.
 
 ```ruby
 Hospice.package :foobar do
@@ -98,7 +98,7 @@ end
 ```
 ### Configuration
 
-Now that you described your package's options we can use them to affect the resulting configuration. Hospice defined three methods that will help you to achieve that: `cookbook`, `recipe` and `config`. They can be called from any option, select or input and will play only for those of them that were enabled.
+Now that you described your package's options we can use them to affect the resulting configuration. Hospice defines three methods that will help you to achieve that: `cookbook`, `recipe` and `config`. They can be called from any option, select or input and also from the package itself.
 
 ```ruby
 Hospice.package :foobar do
@@ -111,8 +111,8 @@ Hospice.package :foobar do
   recipe 'foobar'
 
   option :enable_autostart do
-    # A hash returned from this method will be merged deeply into provisioning configuration
-    # Note that it will only be called if `:enable_autostart` option is enabled.
+    # A hash returning from this method will be merged into provisioning configuration
+    # Note that this is going to happen only while `:enable_autostart` option is enabled.
     config do
       {
         :foobar => {
@@ -124,7 +124,7 @@ Hospice.package :foobar do
     select 'Select launcher to use' do
       option :launcher1 do
         option :deliver_crash_reports do
-          # Another cookbook that will be added if the option containing it is enabled
+          # Another cookbook that will be required as long as `:deliver_crash_reports` is enabled
           cookbook 'foobar_emails'
 
           title 'Deliver crash reports?'
@@ -142,10 +142,10 @@ While `cookbook` and `recipe` methods are pretty straightforward, the `config` m
 Hospice.package :foobar do
   category 'Something'
 
-  # Typically it can accept up to two parameters
+  # Typically it can accept up to two arguments
   config do |config, build|
     config # contains current config condition at the moment of block evaluation
-    build  # details of build that was requested by user – complete list of required packages and options
+    build  # details of build that was requested by user: complete list of required packages and options
   end
 
   # While being called from an input it gets up to three parameters
@@ -153,7 +153,7 @@ Hospice.package :foobar do
     config do |value, config, build|
       value  # a textual input that was provided by user
       config # contains current config condition at the moment of block evaluation
-      build  # details of build that was requested by user – complete list of required packages and options
+      build  # details of build that was requested by user: complete list of required packages and options
     end
   end
 end
@@ -224,3 +224,8 @@ end
 ## Examples
 
 Since Hospice is a working service – just go and look through `packages` and `patterns` directories. It's full of packages we already use.
+
+## Credits
+
+* Andrew Deryabin ([@aderyabin](http://github.com/aderyabin)) [![endorse](http://api.coderwall.com/aderyabin/endorsecount.png)](http://coderwall.com/aderyabin)
+* Boris Staal ([@inossidabile](http://staal.io)) [![endorse](http://api.coderwall.com/inossidabile/endorsecount.png)](http://coderwall.com/inossidabile)
