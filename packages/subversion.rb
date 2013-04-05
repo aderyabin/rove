@@ -1,5 +1,5 @@
 Hospice.package :subversion do
-  category 'Version Controls'
+  category 'Version controls'
 
   cookbook 'subversion'
   recipe 'subversion'
