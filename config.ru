@@ -37,7 +37,7 @@ get '/' do
 end
 
 get '/:id' do
-  send_file Hospice::Builder[params[:id]].zip, disposition: :attachment, filename: 'hospice.zip'
+  send_file Hospice::Builder[params[:id]].zip, disposition: :attachment, filename: "hospice-#{params[:id]}.zip"
 end
 
 post '/' do
