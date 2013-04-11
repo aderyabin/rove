@@ -2,6 +2,7 @@
 
 site 'http://community.opscode.com/api/v1'
 
+cookbook "apt"
 <% cookbooks.each do |cookbook| -%>
 cookbook "<%= cookbook.name %>", <%= cookbook.opts %>
 <% end -%>
