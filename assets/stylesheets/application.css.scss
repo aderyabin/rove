@@ -122,6 +122,19 @@ input.search-query {
     display: block;
   }
 
+  .default {
+    border: 0px;
+    border-bottom: 1px dashed gray;
+    box-shadow: none;
+    transition: none;
+    border-radius: 0px;
+    font-size: 11px;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 4px;
+    margin-left: 4px;
+  }
+
   .input {
     display: none;
     border: 0px;
@@ -132,7 +145,7 @@ input.search-query {
     font-size: 11px;
     padding: 0px;
     margin: 0px;
-    margin-top: 5px;
+    margin-top: 4px;
     margin-left: 4px;
 
     &.visible {

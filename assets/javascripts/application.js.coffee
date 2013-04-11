@@ -2,16 +2,19 @@
 #= require bootstrap
 
 toggle = (element, nesting=0) ->
-  switcher = element.attr('data-switcher')
-  selector = element.attr('data-selector')
-  group    = $("[data-group=#{switcher}]")
+  switcher  = element.attr('data-switcher')
+  selector  = element.attr('data-selector')
+  group     = $("[data-group=#{switcher}]")
+  container = element.parent().parent()
 
   if element.is(':checked')
     group.slideDown()
-    element.parent().next('[type=text]').removeAttr('disabled').fadeIn()
+    container.children('.default').hide()
+    container.children('.input').removeAttr('disabled').show()
   else
     group.slideUp()
-    element.parent().next('[type=text]').attr('disabled', 'disabled').fadeOut()
+    container.children('.default').show()
+    container.children('.input').attr('disabled', 'disabled').hide()
 
   if nesting is 0 && element.is('[type=radio]')
     $("[data-selector=#{selector}]").each -> toggle $(this), nesting+1

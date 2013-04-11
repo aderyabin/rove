@@ -82,7 +82,7 @@ module Hospice
       @config.deep_merge! package.configure(@config, @build)
 
       package.settings.each do |option|
-        if @build[package.id].include?(option.id)
+        if @build[package.id].include?(option.id) || option.default
           @cookbooks += option.cookbooks
           @recipes   += option.recipes
           @config.deep_merge! option.configure(@build[package.id][option.id], @config, @build)

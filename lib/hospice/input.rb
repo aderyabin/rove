@@ -1,6 +1,12 @@
 module Hospice
   class Input < Option
+    def default(value=false)
+      return @default unless value
+      @default = value
+    end
+
     def configure(value, config, build)
+      value = default if value.blank?
       return {} unless @config
 
       result = case @config.arity

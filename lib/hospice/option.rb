@@ -59,5 +59,9 @@ module Hospice
     def select(title, &block)
       @selectors << Selector.new(self, title, package, &block)
     end
+
+    def default(*args)
+      false
+    end
   end
 end

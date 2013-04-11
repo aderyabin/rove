@@ -96,6 +96,23 @@ Hospice.package :foobar do
   end
 end
 ```
+
+Additionaly you can specify a default value like this:
+
+```ruby
+Hospice.package :foobar do
+  category 'Something'
+
+  input :password do
+    default 'ololo'
+
+    config do |value|
+      # this block runs with any configuration: default value is used if input was not enabled manually
+    end
+  end
+end
+```
+
 ### Configuration
 
 Now that you described your package's options we can use them to affect the resulting configuration. Hospice defines three methods that will help you to achieve that: `cookbook`, `recipe` and `config`. They can be called from any option, select or input and also from the package itself.
