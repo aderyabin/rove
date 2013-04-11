@@ -14,8 +14,8 @@ Hospice.package :ruby do
 
       cookbook 'ruby_build', :github => 'fnichol/chef-ruby_build', :ref => 'v0.7.2'
       cookbook 'rbenv', :github => 'fnichol/chef-rbenv'
-      recipe 'rbenv::user'
       recipe 'ruby_build'
+      recipe 'rbenv::user'
 
       option :rbenv_193 do
         title '1.9.3'
@@ -44,7 +44,8 @@ Hospice.package :ruby do
         user_installs: [
           {
             user:   'vagrant',
-            rubies: [ruby]
+            rubies: [ruby],
+            global: ruby
           }
         ]
       }
