@@ -1,6 +1,6 @@
 Hospice.package :apache do
   category 'Web-Servers'
 
-  cookbook 'apache'
-  recipe 'apache'
+  cookbook 'apache2'
+  recipe 'apache2'
 end
