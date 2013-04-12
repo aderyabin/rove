@@ -5,6 +5,15 @@ module Hospice
       @default = value
     end
 
+    def enum(*args)
+      return @enum if args.length == 0
+      @enum = if args.length > 1
+        args
+      else
+        args.first.to_a
+      end
+    end
+
     def configure(value, config, build)
       value = default if value.blank?
       return {} unless @config

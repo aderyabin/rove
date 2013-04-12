@@ -22,6 +22,8 @@ Hospice.package :redis do
 
   input :daemonize do
     default 'yes'
+    enum    'yes', 'no'
+
     config {|value| {redis: {daemonize: value}}}
   end
 
@@ -33,11 +35,12 @@ Hospice.package :redis do
   input :loglevel do
     title "Log level"
     default 'notice'
+    enum    'notice', 'warning'
+
     config {|value| {redis: {loglevel: value}}}
   end
 
   input :password do
-    default nil
     config {|value| {redis: {password: value}}}
   end
 end

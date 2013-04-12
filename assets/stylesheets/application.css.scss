@@ -150,6 +150,7 @@ input.search-query {
     margin-top: 4px;
     margin-left: 4px;
     width: 100%;
+    height: 21px;
   }
 
   .input {
@@ -165,6 +166,8 @@ input.search-query {
     margin-top: 4px;
     margin-left: 4px;
     width: 100%;
+    height: 21px;
+    line-height: auto;
 
     &.visible {
       display: inline;
