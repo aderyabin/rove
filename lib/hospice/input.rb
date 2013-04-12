@@ -5,6 +5,11 @@ module Hospice
       @default = value
     end
 
+    def values(array = [])
+      return @values if array.blank?
+      @values = array
+    end
+
     def configure(value, config, build)
       value = default if value.blank?
       return {} unless @config
