@@ -65,6 +65,7 @@ Hospice.package :apache do
 
   input :keepalive do
     title 'Keep-Alive'
+    values ["On", "Off"]
     default 'On'
     config {|value| {apache: {keepalive: value}}}
   end

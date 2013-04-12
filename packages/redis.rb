@@ -22,6 +22,7 @@ Hospice.package :redis do
 
   input :daemonize do
     default 'yes'
+    values ['yes', 'no']
     config {|value| {redis: {daemonize: value}}}
   end
 
