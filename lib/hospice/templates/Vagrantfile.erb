@@ -16,6 +16,6 @@ Vagrant.configure("2") do |config|
   <% recipes.each do |recipe| -%>
   chef.add_recipe '<%= recipe %>'
   <% end -%>
-  chef.json = <%= PP.pp(config, "") %>
+  chef.json = <%= JSON.pretty_generate(config) %>
   end
 end
