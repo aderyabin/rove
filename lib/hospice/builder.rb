@@ -6,6 +6,7 @@ require 'zip/zip'
 require 'zip/zipfilesystem'
 require 'digest/md5'
 require 'json'
+require 'pp'
 
 module Hospice
   class Builder
