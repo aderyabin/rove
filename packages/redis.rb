@@ -31,6 +31,7 @@ Hospice.package :redis do
   end
 
   input :loglevel do
+    title "Log level"
     default 'notice'
     config {|value| {redis: {loglevel: value}}}
   end

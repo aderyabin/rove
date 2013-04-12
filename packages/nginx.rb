@@ -29,6 +29,7 @@ Hospice.package :nginx do
   end
 
   input :pid do
+    title 'Pid file'
     default '/var/run/nginx.pid'
     config {|value| {nginx: {pid: value}}}
   end
