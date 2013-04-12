@@ -3,11 +3,11 @@
 
 ## Usage
 
-Run `rake server` to bootstrap Sinatra or `rake console` to have come command line fun.
+Run `rake server` to bootstrap Sinatra or `rake console` to have some command line fun.
 
 ## Please contribute
 
-We are doing our best to add more useful packages to Hospice. But that's not enough. If you are an author of a nice Vagrant cookbook – you are very welcome to add it's support!
+We are doing our best to add more useful packages to Hospice. But that's not enough. If you are an author of a nice Vagrant cookbook – you are very welcome to add its support!
 
 To make this job easier we wrapped packages and patterns into a tiny DSL described below. You can find all the packages located at `/packages` directory and patterns at `/patterns` accordingly. 
 
