@@ -41,11 +41,13 @@ Hospice.package :mysql do
   end
 
   input :mysqladmin_bin do
+    title "Mysqladmin binary"
     default '/usr/bin/mysqladmin'
     config {|value| {mysql: {mysqladmin_bin: value}}}
   end
 
   input :mysql_bin do
+    title "Mysql binary"
     default '/usr/bin/mysql'
     config {|value| {mysql: {mysql_bin: value}}}
   end
@@ -61,11 +63,13 @@ Hospice.package :mysql do
   end
 
   input :socket do
+    title "Socket file"
     default '/var/run/mysqld/mysqld.sock'
     config {|value| {mysql: {socket: value}}}
   end
 
   input :pid_file do
+    title "Pid file"
     default '/var/run/mysqld/mysqld.pid'
     config {|value| {mysql: {pid_file: value}}}
   end
