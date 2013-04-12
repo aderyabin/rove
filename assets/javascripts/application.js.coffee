@@ -5,16 +5,16 @@ toggle = (element, nesting=0) ->
   switcher  = element.attr('data-switcher')
   selector  = element.attr('data-selector')
   group     = $("[data-group=#{switcher}]")
-  container = element.parent().parent()
+  inputs    = $("[data-input=#{switcher}]")
 
   if element.is(':checked')
     group.slideDown()
-    container.children('.default').hide()
-    container.children('.input').removeAttr('disabled').show()
+    inputs.filter('.default').hide()
+    inputs.filter('.input').removeAttr('disabled').show()
   else
     group.slideUp()
-    container.children('.default').show()
-    container.children('.input').attr('disabled', 'disabled').hide()
+    inputs.filter('.default').show()
+    inputs.filter('.input').attr('disabled', 'disabled').hide()
 
   if nesting is 0 && element.is('[type=radio]')
     $("[data-selector=#{selector}]").each -> toggle $(this), nesting+1

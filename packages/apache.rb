@@ -64,16 +64,19 @@ Hospice.package :apache do
   end
 
   input :keepalive do
+    title 'Keep-Alive'
     default 'On'
     config {|value| {apache: {keepalive: value}}}
   end
 
   input :keepaliverequests do
+    title 'Keep-Alive Requests'
     default '100'
     config {|value| {apache: {keepaliverequests: value}}}
   end
 
   input :keepalivetimeout do
+    title 'Keep-Alive Timeout'
     default '5'
     config {|value| {apache: {keepalivetimeout: value}}}
   end

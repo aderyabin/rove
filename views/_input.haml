@@ -1,12 +1,16 @@
 - build = @build[input.package.id] || {}
 
 %blockquote.group{data: {group: parent.id}, class: ('visible' if visible)}
-  %label.checkbox.inline
-    %input{checked: build.include?(input.id), type: "checkbox", data: {switcher: input.id}}
-    = input.title
-  - if input.default
-    %input.default{type: 'text', value: input.default, readonly: true}
-  %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !build.include?(input.id), class: ('visible' if build.include?(input.id)), value: build[input.id]}
+  %table
+    %tr
+      %td.intro
+        %label.checkbox.inline
+          %input{checked: build.include?(input.id), type: "checkbox", data: {switcher: input.id}}
+          = input.title
+      %td
+        - if input.default
+          %input.default{type: 'text', value: input.default, readonly: true, data: {input: input.id}}
+        %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !build.include?(input.id), class: ('visible' if build.include?(input.id)), value: build[input.id], data: {input: input.id}}
 
   - input.selectors.each do |selector|
     = haml(:_selector, layout: false, locals: {selector: selector, parent: input, visible: build.include?(input.id)})

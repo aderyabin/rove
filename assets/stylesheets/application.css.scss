@@ -92,8 +92,10 @@
   }
 }
 
-blockquote legend {
-  font-size: 18px;
+blockquote {
+  legend {
+    font-size: 18px;
+  }
 }
 
 legend {
@@ -118,6 +120,20 @@ input.search-query {
   display: none;
   margin-bottom: 0px;
 
+  table {
+    width: 100%;
+
+    td {
+      vertical-align: top;
+    }
+
+    td.intro {
+      white-space: nowrap;
+      width: 1%;
+      padding-right: 0px;
+    }
+  }
+
   &.visible {
     display: block;
   }
@@ -133,6 +149,7 @@ input.search-query {
     margin: 0px;
     margin-top: 4px;
     margin-left: 4px;
+    width: 100%;
   }
 
   .input {
@@ -147,6 +164,7 @@ input.search-query {
     margin: 0px;
     margin-top: 4px;
     margin-left: 4px;
+    width: 100%;
 
     &.visible {
       display: inline;

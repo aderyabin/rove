@@ -20,19 +20,6 @@ Hospice.package :postgresql do
     }
   end
 
-  input :version do
-    title 'Version'
-    default '9.1'
-
-    config do |value|
-      {
-        postgresql: {
-          version: value
-        }
-      }
-    end
-  end
-
   input :password do
     title 'Superuser password'
     default 'password'

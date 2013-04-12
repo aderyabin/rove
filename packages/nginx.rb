@@ -3,11 +3,6 @@ Hospice.package :nginx do
   cookbook 'nginx'
   recipe 'nginx'
 
-  input :version do
-    default '1.2.6'
-    config {|value| {nginx: {version: value}}}
-  end
-
   input :dir do
     default '/etc/nginx'
     config {|value| {nginx: {dir: value}}}
