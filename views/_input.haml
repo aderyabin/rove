@@ -8,11 +8,7 @@
           %input{checked: build.include?(input.id), type: "checkbox", data: {switcher: input.id}}
           = input.title
       %td
-        - unless input.values.blank?
-          %select{name: "options[#{input.package.id}][#{input.id}]"}
-            - for value in input.values
-              %option= value
-        - else
+        - if input.values.blank?
           - if input.default
             %input.default{type: 'text', value: input.default, readonly: true, data: {input: input.id}}
           %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !build.include?(input.id), class: ('visible' if build.include?(input.id)), value: build[input.id], data: {input: input.id}}
@@ -23,3 +19,11 @@
     = haml(:_option, layout: false, locals: {option: sub_option, parent: input, visible: build.include?(input.id)})
   - input.inputs.each do |sub_input|
     = haml(:_input, layout: false, locals: {input: sub_input, parent: input, visible: build.include?(input.id)})
+
+  - unless input.values.blank?
+    %blockquote.group{data: {group: input.id}}
+      %fieldset
+        - input.values.each do |value|
+          %label.radio
+            %input{name: "options[#{input.package.id}][#{input.id}]", checked: value == input.default, type: 'radio', value: value}
+            = value
