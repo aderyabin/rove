@@ -6,6 +6,7 @@ require 'compass'
 require 'sprockets-sass'
 require 'bootstrap-sass'
 require 'coffee-script'
+require 'ap'
 
 require './setup'
 
