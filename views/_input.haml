@@ -9,7 +9,7 @@
           = input.title
       %td
         - if input.default
-          %input.default{type: 'text', value: input.default, readonly: true, data: {input: input.id}}
+          %input.default{type: 'text', value: input.default, readonly: true, data: {input: input.id}, style: ('display: none' if build.include?(input.id))}
 
         - unless input.enum
           %input.input{type: 'text', placeholder: "enter value", name: "options[#{input.package.id}][#{input.id}]", disabled: !build.include?(input.id), class: ('visible' if build.include?(input.id)), value: build[input.id], data: {input: input.id}}
