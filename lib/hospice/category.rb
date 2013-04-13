@@ -14,7 +14,7 @@ module Hospice
     end
 
     def packages
-      Package.all.select{|p| p.category.id == id}
+      Package.all.select{|p| p.category.id == id}.sort_by{|x| x.title}
     end
 
     private

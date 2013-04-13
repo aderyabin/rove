@@ -19,15 +19,15 @@ module Hospice
     end
 
     def packages
-      Package.all
+      Package.all.sort_by{|x| x.title}
     end
 
     def categories
-      Category.all
+      Category.all.sort_by{|x| x.title}
     end
 
     def patterns
-      Pattern.all
+      Pattern.all.sort_by{|x| x.title}
     end
 
     def load!(path)
