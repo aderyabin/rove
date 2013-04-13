@@ -3,6 +3,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+unless Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.1.0')
+  puts "-----------------------------------------"
+  puts "Vagrant > 1.1.0 required, please ugprade!"
+  exit
+end
+
+Vagrant.require_plugin "vagrant-librarian-chef"
+
 Vagrant::Config.run do |config|
 
   config.vm.box = "precise64"

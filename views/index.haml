@@ -108,22 +108,21 @@
                     %a{href: 'http://vagrantup.com/'} Vagrant
                     configuration. Typically it is supposed to be placed at the root of your project. Just put it whenever you want your box root should be. Additional documentation can be found
                     %a{href: 'http://docs.vagrantup.com/v2/vagrantfile/index.html'} here.
+                    Note that Hospice requires you to use Vagrant &gt; 1.1.0.
                   %li
                     %b Cheffile
                     describes sources of cookbooks we use to provision packages you demanded. It's used by
                     %a{href: 'https://github.com/applicationsonline/librarian'} Librarian
-                    to download all the cookbooks you need including referenced dependencies. Unless you already have it install it using 
-                    %code gem install librarian
-                    command.
+                    to download all the cookbooks you need including referenced dependencies. General configuration depends on the
+                    %code vagrant-librarian-chef
+                    plugin. Install it using 
+                    %code vagrant plugin install vagrant-librarian-chef
+                    command unless you already have it.
 
                 %p To finalize the setup and run your box you should:
 
                 %ul
                   %li put both of files to the root of your project (it will be the root of a virtual box)
-                  %li
-                    run 
-                    %code librarian-chef install
-                    to grab required cookbooks
                   %li
                     run
                     %code vagrant up
