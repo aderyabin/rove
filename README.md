@@ -1,5 +1,5 @@
 # Rove
-[![Code Climate](https://codeclimate.com/github/aderyabin/hospice.png)](https://codeclimate.com/github/aderyabin/hospice)
+[![Code Climate](https://codeclimate.com/github/aderyabin/rove.png)](https://codeclimate.com/github/aderyabin/rove)
 
 ## Usage
 
