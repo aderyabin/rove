@@ -1,4 +1,4 @@
-module Hospice
+module Rove
   class Pattern
     include Support::Storer
 

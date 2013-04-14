@@ -1,4 +1,4 @@
-module Hospice
+module Rove
   class Package < Option
     include Support::Storer
 
@@ -23,7 +23,7 @@ module Hospice
 
     def category(title=false)
       return @category unless title
-      @category = Hospice::Category.build(title)
+      @category = Rove::Category.build(title)
     end
 
     def finalizer(&block)

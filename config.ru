@@ -28,20 +28,20 @@ map '/assets' do
 end
 
 get '/' do
-  @pattern = Hospice::Pattern[params[:pattern]] if params[:pattern]
+  @pattern = Rove::Pattern[params[:pattern]] if params[:pattern]
 
   @build   = @pattern.try(:build)
-  @build ||= Hospice::Builder[params[:id].try(:strip)].try(:build)
+  @build ||= Rove::Builder[params[:id].try(:strip)].try(:build)
   @build ||= {}
 
   haml :index
 end
 
 get '/:id' do
-  build = Hospice::Builder[params[:id]]
+  build = Rove::Builder[params[:id]]
 
   if build
-    send_file build.zip, disposition: :attachment, filename: "hospice-#{params[:id]}.zip"
+    send_file build.zip, disposition: :attachment, filename: "rove-#{params[:id]}.zip"
   else
     redirect '/'
   end
@@ -70,7 +70,7 @@ post '/' do
     end
   end
 
-  Hospice::Builder << build
+  Rove::Builder << build
 end
 
 run Sinatra::Application

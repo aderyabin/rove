@@ -1,4 +1,4 @@
-Hospice.package :php do
+Rove.package :php do
   title 'PHP'
   category 'Languages'
 

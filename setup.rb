@@ -1,4 +1,4 @@
-require_relative 'lib/hospice'
+require_relative 'lib/rove'
 
-Hospice.load! "#{File.dirname(__FILE__)}/packages"
-Hospice.load! "#{File.dirname(__FILE__)}/patterns"
+Rove.load! "#{File.dirname(__FILE__)}/packages"
+Rove.load! "#{File.dirname(__FILE__)}/patterns"

@@ -1,4 +1,4 @@
-Hospice.pattern :rails do
+Rove.pattern :rails do
   title 'Rails'
 
   package 'ruby', 'rbenv', 'rbenv_193', 'rbenv_200'

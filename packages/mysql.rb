@@ -1,4 +1,4 @@
-Hospice.package :mysql do
+Rove.package :mysql do
   title 'MySQL'
   category 'Databases'
 

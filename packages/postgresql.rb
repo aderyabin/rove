@@ -1,4 +1,4 @@
-Hospice.package :postgresql do
+Rove.package :postgresql do
   title 'PostgreSQL'
   category 'Databases'
 

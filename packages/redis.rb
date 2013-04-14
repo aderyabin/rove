@@ -1,4 +1,4 @@
-Hospice.package :redis do
+Rove.package :redis do
   title 'Redis'
   category 'Databases'
 

@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Hospice
+    %title Rove
     %link{href: '/assets/application.css', rel: 'stylesheet', type: 'text/css'}
     %link{href: 'http://fonts.googleapis.com/css?family=Gabriela', rel: 'stylesheet', type: 'text/css'}
     %link{ href: '/assets/favicon.ico', rel: 'shortcut icon', type: 'image/ico' }
@@ -13,9 +13,9 @@
           .span4
             .intro
               %p.text-right.logo
-                %a{href: '/'} | Hospice
+                %a{href: '/'} | Rove ~
               %p.text-right
-                %b Hospice.io
+                %b Rove.io
                 is a service that allows you to pregenerate typical
                 %a{href: 'http://www.vagrantup.com/'} Vagrant
                 builds.
@@ -58,13 +58,13 @@
               You can start with one of typical patterns or proceed down to manual configuration form
             .row
               .span8
-                - Hospice::Pattern.all.each do |pattern|
+                - Rove::Pattern.all.each do |pattern|
                   %a.btn{href: "/?pattern=#{pattern.id}", class: ("btn-info" if @pattern == pattern)}
                     = pattern.title
             .alert.guide
               Select services you would like to enable at a Vagrant box
             %form#data{method: 'POST', action: '/', autocomplete: 'off'}
-              - Hospice.categories.each do |category|
+              - Rove.categories.each do |category|
                 %input.search-query{type: 'text', placeholder: 'Filter...', data: {category: category.id}}
                 %fieldset
                   %legend= category.title

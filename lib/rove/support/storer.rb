@@ -1,6 +1,6 @@
 require 'active_support/all'
 
-module Hospice
+module Rove
   module Support
     module Storer extend ActiveSupport::Concern
       included do

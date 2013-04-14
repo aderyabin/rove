@@ -1,4 +1,4 @@
-Hospice.package :python do
+Rove.package :python do
   category 'Languages'
 
   cookbook 'python'

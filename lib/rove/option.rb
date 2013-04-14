@@ -1,4 +1,4 @@
-module Hospice
+module Rove
   class Option
     attr_reader :id, :package, :cookbooks, :recipes, :options, :inputs, :selectors
 

@@ -1,4 +1,4 @@
-Hospice.package :couch_db do
+Rove.package :couch_db do
   title 'CouchDB'
   category 'Databases'
 

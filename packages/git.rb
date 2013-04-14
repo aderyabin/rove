@@ -1,4 +1,4 @@
-Hospice.package :git do
+Rove.package :git do
   category 'Version controls'
   cookbook 'git'
   recipe 'git'

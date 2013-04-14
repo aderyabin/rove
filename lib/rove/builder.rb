@@ -8,7 +8,7 @@ require 'digest/md5'
 require 'json'
 require 'pp'
 
-module Hospice
+module Rove
   class Builder
     PATH = 'files'
 
@@ -51,7 +51,7 @@ module Hospice
     end
 
     def zip
-      tempfile  = Tempfile.new('hospice')
+      tempfile  = Tempfile.new('rove')
       path      = tempfile.path
       cookbooks = @cookbooks
       recipes   = @recipes
@@ -71,7 +71,7 @@ module Hospice
     private
 
     def parse_build!
-      Hospice::Package.all.each do |package|
+      Rove::Package.all.each do |package|
         parse_package!(package) if @build.include?(package.id)
       end
     end

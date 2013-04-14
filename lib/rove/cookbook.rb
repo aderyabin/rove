@@ -1,4 +1,4 @@
-module Hospice
+module Rove
   class Cookbook
     attr_reader :name, :opts
 

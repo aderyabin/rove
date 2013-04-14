@@ -1,14 +1,14 @@
-require_relative 'hospice/support/storer'
-require_relative 'hospice/builder'
-require_relative 'hospice/category'
-require_relative 'hospice/cookbook'
-require_relative 'hospice/option'
-require_relative 'hospice/input'
-require_relative 'hospice/package'
-require_relative 'hospice/pattern'
-require_relative 'hospice/selector'
+require_relative 'rove/support/storer'
+require_relative 'rove/builder'
+require_relative 'rove/category'
+require_relative 'rove/cookbook'
+require_relative 'rove/option'
+require_relative 'rove/input'
+require_relative 'rove/package'
+require_relative 'rove/pattern'
+require_relative 'rove/selector'
 
-module Hospice
+module Rove
   class << self
     def package(id, &block)
       Package.new(id, &block)

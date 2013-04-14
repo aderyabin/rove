@@ -1,4 +1,4 @@
-Hospice.package :subversion do
+Rove.package :subversion do
   category 'Version controls'
 
   cookbook 'subversion'

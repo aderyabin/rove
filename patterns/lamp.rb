@@ -1,4 +1,4 @@
-Hospice.pattern :lamp do
+Rove.pattern :lamp do
   title 'LAMP'
 
   package :apache

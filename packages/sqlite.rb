@@ -1,4 +1,4 @@
-Hospice.package :sqlite do
+Rove.package :sqlite do
   title 'SQLite'
   category 'Databases'
 

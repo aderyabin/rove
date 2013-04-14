@@ -1,4 +1,4 @@
-Hospice.package :nginx do
+Rove.package :nginx do
   category 'Web-Servers'
   cookbook 'nginx'
   recipe 'nginx'

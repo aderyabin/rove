@@ -1,4 +1,4 @@
-module Hospice
+module Rove
   class Input < Option
     def default(value=false)
       return @default unless value

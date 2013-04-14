@@ -1,4 +1,4 @@
-Hospice.package :ruby do
+Rove.package :ruby do
   category 'Languages'
 
   select 'Ruby Manager' do

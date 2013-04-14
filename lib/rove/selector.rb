@@ -1,4 +1,4 @@
-module Hospice
+module Rove
   class Selector
     attr_reader :parent, :package, :title, :options, :inputs
 
