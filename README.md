@@ -265,7 +265,7 @@ Since Rove is a working service – just go and look through `packages` and `pat
 
 ## Special Thanks
 * Ravil Bayramgalin ([@brainopia](http://github.com/brainopia))
-* Kirill Kouznetsov ([dragonsmith](http://github.com/dragonsmith))
+* Kirill Kouznetsov ([@dragonsmith](http://github.com/dragonsmith))
 
 Sponsored by [Evil Martians](http://evilmartians.com/).
 
