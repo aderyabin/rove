@@ -1,5 +1,5 @@
 # Rove
-[![Code Climate](https://codeclimate.com/github/aderyabin/rove.png)](https://codeclimate.com/github/aderyabin/rove)
+Rove - visual online Vagrant configurator. [![Code Climate](https://codeclimate.com/github/aderyabin/rove.png)](https://codeclimate.com/github/aderyabin/rove)
 
 ## Usage
 
@@ -260,5 +260,12 @@ Since Rove is a working service – just go and look through `packages` and `pat
 
 ## Credits
 
-* Andrew Deryabin ([@aderyabin](http://github.com/aderyabin)) [![endorse](http://api.coderwall.com/aderyabin/endorsecount.png)](http://coderwall.com/aderyabin)
+* Andrey Deryabin ([@aderyabin](http://github.com/aderyabin)) [![endorse](http://api.coderwall.com/aderyabin/endorsecount.png)](http://coderwall.com/aderyabin)
 * Boris Staal ([@inossidabile](http://staal.io)) [![endorse](http://api.coderwall.com/inossidabile/endorsecount.png)](http://coderwall.com/inossidabile)
+
+## Special Thanks
+* Ravil Bayramgalin ([@brainopia](http://github.com/brainopia))
+* Kirill Kouznetsov ([dragonsmith](http://github.com/dragonsmith))
+
+Sponsored by [Evil Martians](http://evilmartians.com/).
+
