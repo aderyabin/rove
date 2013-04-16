@@ -1,5 +1,5 @@
 Rove.package :tmux do
-  category 'Development environment'
+  category 'Tools'
   title 'tmux'
 
   cookbook 'tmux'
