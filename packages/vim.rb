@@ -1,8 +1,11 @@
 Rove.package :vim do
   category 'Tools'
 
+  cookbook :vim
+  recipe :vim
+
   option :vim_rails do
-    title 'Vim Rails support'
+    title 'rails.vim'
     config do
       {
         vim: {
@@ -13,7 +16,4 @@ Rove.package :vim do
       }
     end
   end
-
-  cookbook :vim
-  recipe :vim
 end
