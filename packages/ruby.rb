@@ -5,8 +5,10 @@ Rove.package :ruby do
     option :rvm do
       title 'RVM'
 
+      cookbook 'build-essential'
       cookbook 'rvm', :github => 'fnichol/chef-rvm', :ref => 'v0.9.0'
-      recipe 'rvm'
+      recipe 'rvm::vagrant'
+      recipe 'rvm::system'
     end
 
     option :rbenv do
