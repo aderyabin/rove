@@ -3,6 +3,15 @@ Rove.package :apache do
   cookbook 'apache2'
   recipe 'apache2'
 
+  input :default_site_enabled do
+    title 'Default site enabled'
+
+    default 'true'
+    enum    'true', 'false'
+
+    config {|value| {apache: {default_site_enabled: value}}}
+  end
+
   input :dir do
     default '/etc/apache2'
     config {|value| {apache: {dir: value}}}
