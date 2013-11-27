@@ -37,6 +37,10 @@ get '/' do
   haml :index
 end
 
+get '/install' do
+  File.read(File.join('binscripts', 'install'))
+end
+
 get '/:id' do
   build = Rove::Builder[params[:id]]
 
