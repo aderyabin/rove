@@ -81,7 +81,12 @@ module Rove
       @cookbooks += package.cookbooks
       @recipes   += package.recipes
       @config.deep_merge! package.configure(@config, @build)
+      parse_package_settings!(package)
 
+      config = package.finalize(config)
+    end
+
+    def parse_package_settings!(package)
       package.settings.each do |option|
         if @build[package.id].include?(option.id) || option.default
           @cookbooks += option.cookbooks
@@ -89,8 +94,6 @@ module Rove
           @config.deep_merge! option.configure(@build[package.id][option.id], @config, @build)
         end
       end
-
-      config = package.finalize(config)
     end
 
     def template(name)
