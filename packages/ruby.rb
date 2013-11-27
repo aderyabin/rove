@@ -23,7 +23,7 @@ Rove.package :ruby do
         title '1.9.3'
 
         config do |config|
-          inject_rbenv_ruby(config, '1.9.3-p392')
+          inject_rbenv_ruby(config, '1.9.3-p484')
         end
       end
 
@@ -31,7 +31,15 @@ Rove.package :ruby do
         title '2.0.0'
 
         config do |config|
-          inject_rbenv_ruby(config, '2.0.0-p0')
+          inject_rbenv_ruby(config, '2.0.0-p353')
+        end
+      end
+
+      option :rbenv_210 do
+        title '2.1.0'
+
+        config do |config|
+          inject_rbenv_ruby(config, '2.1.0-preview2')
         end
       end
     end
