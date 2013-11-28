@@ -24,18 +24,9 @@ module Rove
       end
 
       def <<(build)
-        json_text = build.to_json
-        filename = Digest::MD5.hexdigest(json_text)
-        path = File.join(PATH, filename)
-
-        unless File.exists?(path)
-          FileUtils.mkdir_p(PATH)
-          file = File.open(path,"w")
-          file.write(json_text)
-          file.close
-        end
-
-        filename
+        builder = new(build)
+        builder.save_to_file
+        builder.id
       end
     end
 
@@ -50,12 +41,34 @@ module Rove
       parse_build!
     end
 
+    def json_text
+      @json_text ||= build.to_json
+    end
+
+    def path
+      @path ||= File.join(PATH, id)
+    end
+
+    def id
+      @id ||= Digest::MD5.hexdigest(json_text)
+    end
+
+    def save_to_file
+      unless File.exists?(path)
+        FileUtils.mkdir_p(PATH)
+        file = File.open(path,"w")
+        file.write(json_text)
+        file.close
+      end
+    end
+
     def zip
       tempfile  = Tempfile.new('rove')
       path      = tempfile.path
       cookbooks = @cookbooks
       recipes   = @recipes
       config    = @config
+      id        = self.id
 
       Zip::ZipOutputStream.open(tempfile.path) do |z|
         %w(Vagrantfile Cheffile).each do |t|
