@@ -85,6 +85,21 @@
                       - package.inputs.each do |input|
                         = haml(:_input, layout: false, locals: {input: input, parent: package, visible: !@build[package.id].nil?})
 
+              %fieldset
+                %legend= "Vagrant Settings"
+                - Rove.vagrant_settings.each do |setting|
+                  %label.checkbox.setting
+                    %input{type: "checkbox", checked: (!@build[setting.id].nil?), name: "vagrant_setting[#{setting.id}]", value: true, data: {switcher: setting.id}}
+                    %span= setting.title
+
+                    - setting.selectors.each do |selector|
+                      = haml(:_selector, layout: false, locals: {selector: selector, parent: setting, visible: !@build[setting.id].nil?})
+                    - setting.options.each do |sub_option|
+                      = haml(:_option, layout: false, locals: {option: sub_option, parent: setting, visible: !@build[setting.id].nil?})
+                    - setting.inputs.each do |input|
+                      = haml(:_input, layout: false, locals: {input: input, parent: setting, visible: !@build[setting.id].nil?})
+                      
+
               .form-actions
                 .pull-right
                   %input.btn.btn-primary{type: 'submit', value: 'Generate'}
