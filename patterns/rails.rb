@@ -5,5 +5,5 @@ Rove.pattern :rails do
   package :postgresql
   package :redis
   package :git
-  vagrant_setting :port_forward, 3000, 3000
+  vagrant_setting :port_forward, {:guest_port => 3000, :host_port => 3000}
 end
