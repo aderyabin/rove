@@ -74,6 +74,29 @@ post '/' do
     end
   end
 
+  if params['vagrant_setting']
+
+    params['vagrant_setting'].each do |setting, _|
+
+      build[setting] = {}
+
+      if params['selects'] && params['selects'][setting]
+        params['selects'][setting].each do |_, option|
+          build[setting][option] = true
+        end
+      end
+
+      if params['options'] && params['options'][setting]
+        params['options'][setting].each do |option, value|
+
+          build[setting][option] = value.blank? ? true : value
+          
+        end
+      end
+
+    end
+  end
+
   Rove::Builder << build
 end
 
