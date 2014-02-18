@@ -25,21 +25,8 @@ module Rove
       return self.class.name
     end
 
-    def finalizer(&block)
-      @finalizer = block
-    end
-
-    def finalize(config)
-      return config unless @finalizer
-      @finalizer.call(config)
-    end
-
     def write_line
       @output
-    end
-
-    def config_item(&block)
-      @config = block
     end
 
     def configure(values)

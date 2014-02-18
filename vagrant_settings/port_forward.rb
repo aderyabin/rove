@@ -1,6 +1,6 @@
 Rove.vagrant_setting :port_forward do
 
-  config_item do |guest_port, host_port|
+  config do |guest_port, host_port|
     "config.vm.network :forwarded_port, guest: #{guest_port}, host: #{host_port}"
   end
 
