@@ -302,7 +302,6 @@ Rove.pattern :rails do
   
   # Add Vagrant configuration if necessary
   vagrant_setting :port_forward, {:guest_port => 3000, :host_port => 3000}
-  
 end
 ```
 

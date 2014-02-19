@@ -96,35 +96,23 @@ module Rove
     end
 
     def parse_vagrant!(vagrant_setting)
-
       vagrant_setting.configure parse_vagrant_settings!(vagrant_setting)
-
       @vagrant_settings << vagrant_setting
-
     end
 
     def parse_vagrant_settings!(vagrant_setting)
-
       config = []
 
       vagrant_setting.settings.each do |option|
-
         if @build[vagrant_setting.id].include?(option.id) || option.default
-
           if @build[vagrant_setting.id].include?(option.id)
-
             config << @build[vagrant_setting.id][option.id]
-
           else
-
             config << option.default
-
           end
-
         end
-
       end
-
+      
       config
     end
 
