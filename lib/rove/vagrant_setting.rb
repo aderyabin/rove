@@ -32,7 +32,7 @@ module Rove
     def configure(values)
       @output = "" unless @config
 
-      @output = @config.call *values
+      @output = @config.call *values if @config
     end
 
     def ensure_option!(parent, id, package, &block)
