@@ -31,9 +31,20 @@ filter = (element) ->
     else
       element.slideUp()
 
+selectText = (element) ->
+  if document.selection
+    range = document.body.createTextRange()
+    range.moveToElementText(element)
+    range.select()
+  else if window.getSelection
+    range = document.createRange()
+    range.selectNode(element)
+    window.getSelection().addRange(range)
+
 $ ->
   $('[data-switcher]').click -> toggle $(this)
   $('input[data-category]').keyup -> filter $(this)
+  $('code').click -> selectText(this)
 
   $('#data').submit ->
     $('#id .help, #id .generated').hide()
