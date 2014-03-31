@@ -42,6 +42,15 @@ Rove.package :ruby do
           inject_rbenv_ruby(config, '2.1.0-preview2')
         end
       end
+
+      option :rbenv_211 do
+        title '2.1.1'
+
+        config do |config|
+          inject_rbenv_ruby(config, '2.1.1')
+        end
+      end
+
     end
   end
 
