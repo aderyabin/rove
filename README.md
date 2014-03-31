@@ -9,7 +9,7 @@ Run `rake server` to bootstrap Sinatra or `rake console` to have some command li
 
 We are doing our best to add more useful packages to Rove. But that's not enough. If you are an author of a nice Vagrant cookbook – you are very welcome to add its support!
 
-To make this job easier we wrapped packages and patterns into a tiny DSL described below. You can find all the packages located at `/packages` directory and patterns at `/patterns` accordingly. 
+To make this job easier we wrapped packages and patterns into a tiny DSL described below. You can find all the packages located at `/packages` directory, patterns at `/patterns` and vagrant configuration in `vagrant_settings` accordingly. 
 
 **Feel free to add some more and create a shiny pull request!**
 
@@ -231,9 +231,57 @@ end
 
 Finalizer can only be defined at a package level.
 
+
+### Vagrant Settings
+
+Vagrant Settings are also atomic parts of the config, follow a similar pattern to Packages and support altering the default Vagrant configuration. They inherit the same user input options as Packages along with default values.
+
+Here is an example of a setting taking two input values and being applied to create a line of configuration for Vagrant:
+
+```ruby
+Rove.vagrant_setting :my_setting do
+
+  # Provide a block returning a line of config.
+  # Values appear in the order of input specification below
+  config do |first_value, second_value|
+    "vagrant.config :i_want_to_set, this: #{first_value}, and_this: #{second_value}"
+  end
+
+  input :option_1 do
+    title 'Please set me'
+    default 'foo'
+    config do |value|
+      {
+        my_setting: {
+          config: {
+            option_1: value
+          }
+        }
+      }
+    end
+  end
+
+  input :option_2 do
+    title 'I need to be set too'
+    default 'bar'
+    config do |value|
+      {
+        my_setting: {
+          config: {
+            option_2: value
+          }
+        }
+      }
+    end
+  end
+
+end
+```
+
+
 ### Patterns
 
-Pattern is a build template. It lists pre-enabled packages and corresponding internal options for each of them. Patterns are powered by a single command called `package`.
+Pattern is a build template. It lists pre-enabled packages and corresponding internal options for each of them. Patterns are powered by the configuration objects listed previously as commands such as `package` or `vagrant_setting`.
 
 ```ruby
 Rove.pattern :rails do
@@ -251,12 +299,15 @@ Rove.pattern :rails do
   package :postgresql
   package :redis
   package :git
+  
+  # Add Vagrant configuration if necessary
+  vagrant_setting :port_forward, {:guest_port => 3000, :host_port => 3000}
 end
 ```
 
 ## Examples
 
-Since Rove is a working service – just go and look through `packages` and `patterns` directories. It's full of packages we already use.
+Since Rove is a working service – just go and look through `packages`, `patterns` or `vagrant_settings` directories. It's full of packages we already use.
 
 ## Credits
 

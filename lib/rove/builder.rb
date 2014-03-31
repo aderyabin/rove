@@ -12,7 +12,7 @@ module Rove
   class Builder
     PATH = 'files'
 
-    attr_reader :packages, :recipes, :cookbooks, :build, :config
+    attr_reader :packages, :recipes, :cookbooks, :build, :config, :vagrant_settings
 
     class << self
       def [](id)
@@ -33,10 +33,11 @@ module Rove
     def initialize(build)
       @build = build.with_indifferent_access
 
-      @packages   = []
-      @recipes    = []
-      @cookbooks  = []
-      @config     = {}
+      @packages         = []
+      @recipes          = []
+      @cookbooks        = []
+      @config           = {}
+      @vagrant_settings = []
 
       parse_build!
     end
@@ -63,12 +64,13 @@ module Rove
     end
 
     def zip
-      tempfile  = Tempfile.new('rove')
-      path      = tempfile.path
-      cookbooks = @cookbooks
-      recipes   = @recipes
-      config    = @config
-      id        = self.id
+      tempfile          = Tempfile.new('rove')
+      path              = tempfile.path
+      cookbooks         = @cookbooks
+      recipes           = @recipes
+      config            = @config
+      vagrant_settings  = @vagrant_settings
+      id                = self.id
 
       Zip::ZipOutputStream.open(tempfile.path) do |z|
         %w(Vagrantfile Cheffile).each do |t|
@@ -87,6 +89,31 @@ module Rove
       Rove::Package.all.each do |package|
         parse_package!(package) if @build.include?(package.id)
       end
+
+      Rove::VagrantSetting.all.each do |setting|
+        parse_vagrant!(setting) if @build.include?(setting.id)
+      end
+    end
+
+    def parse_vagrant!(vagrant_setting)
+      vagrant_setting.configure parse_vagrant_settings!(vagrant_setting)
+      @vagrant_settings << vagrant_setting
+    end
+
+    def parse_vagrant_settings!(vagrant_setting)
+      config = []
+
+      vagrant_setting.settings.each do |option|
+        if @build[vagrant_setting.id].include?(option.id) || option.default
+          if @build[vagrant_setting.id].include?(option.id)
+            config << @build[vagrant_setting.id][option.id]
+          else
+            config << option.default
+          end
+        end
+      end
+      
+      config
     end
 
     def parse_package!(package)

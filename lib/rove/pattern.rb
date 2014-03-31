@@ -2,7 +2,7 @@ module Rove
   class Pattern
     include Support::Storer
 
-    attr_reader :id, :packages, :build
+    attr_reader :id, :packages, :build, :vagrant_settings
 
     class << self
       def [](id)
@@ -14,6 +14,7 @@ module Rove
       @id       = id.to_sym
       @title    = id.to_s.humanize
       @packages = {}
+      @vagrant_settings = {}
 
       instance_eval &block if block_given?
       store
@@ -35,7 +36,23 @@ module Rove
     end
 
     def build
-      @packages.with_indifferent_access
+
+      config = @packages.merge @vagrant_settings
+
+      config.with_indifferent_access
+
+    end
+
+    def vagrant_setting(id, *options)
+
+      options = options[0] if options[0].is_a?(Hash)
+
+      if options.is_a?(Array)
+        options = Hash[*options.map{|x| [x,nil]}.flatten]
+      end
+
+      @vagrant_settings[id] = options
+      
     end
   end
 end
