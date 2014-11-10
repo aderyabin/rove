@@ -51,6 +51,21 @@ Rove.package :ruby do
         end
       end
 
+      option :rbenv_212 do
+        title '2.1.2'
+
+        config do |config|
+          inject_rbenv_ruby(config, '2.1.2')
+        end
+      end
+
+      option :rbenv_213 do
+        title '2.1.3'
+
+        config do |config|
+          inject_rbenv_ruby(config, '2.1.3')
+        end
+      end
     end
   end
 
