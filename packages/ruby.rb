@@ -43,27 +43,12 @@ Rove.package :ruby do
         end
       end
 
-      option :rbenv_211 do
-        title '2.1.1'
-
-        config do |config|
-          inject_rbenv_ruby(config, '2.1.1')
-        end
-      end
-
-      option :rbenv_212 do
-        title '2.1.2'
-
-        config do |config|
-          inject_rbenv_ruby(config, '2.1.2')
-        end
-      end
-
-      option :rbenv_213 do
-        title '2.1.3'
-
-        config do |config|
-          inject_rbenv_ruby(config, '2.1.3')
+      %w[2.1.1 2.1.2 2.1.3 2.1.4 2.1.5].each do |version|
+        option version do
+          title version
+          config do |config|
+            inject_rbenv_ruby(config, version)
+          end
         end
       end
     end
