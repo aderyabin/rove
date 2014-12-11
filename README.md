@@ -9,7 +9,7 @@ Run `rake server` to bootstrap Sinatra or `rake console` to have some command li
 
 We are doing our best to add more useful packages to Rove. But that's not enough. If you are an author of a nice Vagrant cookbook – you are very welcome to add its support!
 
-To make this job easier we wrapped packages and patterns into a tiny DSL described below. You can find all the packages located at `/packages` directory, patterns at `/patterns` and vagrant configuration in `vagrant_settings` accordingly. 
+To make this job easier we wrapped packages and patterns into a tiny DSL described below. You can find all the packages located at `/packages` directory, patterns at `/patterns` and vagrant configuration in `vagrant_settings` accordingly.
 
 **Feel free to add some more and create a shiny pull request!**
 
@@ -207,7 +207,7 @@ Rove.package :foobar do
 end
 ```
 
-An order of merge between options is not declared. They have to be isolated and it plays well in most cases. But sometimes it doesn't. In these dark times `finalizer` comes to save you. Consider it an after-filter of a package configuration. 
+An order of merge between options is not declared. They have to be isolated and it plays well in most cases. But sometimes it doesn't. In these dark times `finalizer` comes to save you. Consider it an after-filter of a package configuration.
 
 ```ruby
 Rove.package :foobar do
@@ -299,7 +299,7 @@ Rove.pattern :rails do
   package :postgresql
   package :redis
   package :git
-  
+
   # Add Vagrant configuration if necessary
   vagrant_setting :port_forward, {:guest_port => 3000, :host_port => 3000}
 end
@@ -318,5 +318,5 @@ Since Rove is a working service – just go and look through `packages`, `patter
 * Ravil Bayramgalin ([@brainopia](http://github.com/brainopia))
 * Kirill Kouznetsov ([@dragonsmith](http://github.com/dragonsmith))
 
-Sponsored by [Evil Martians](http://evilmartians.com/).
+[! [Sponsored by Evil Martians] (https://evilmartians.com/badges/sponsored-by-evil-martians.svg) ](http://evilmartians.com/)
 
