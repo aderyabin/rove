@@ -318,8 +318,7 @@ Since Rove is a working service – just go and look through `packages`, `patter
 * Ravil Bayramgalin ([@brainopia](http://github.com/brainopia))
 * Kirill Kouznetsov ([@dragonsmith](http://github.com/dragonsmith))
 
-<div style="text-align:center;padding-top: 40px;border-top: 1px solid #eee;">
-<a href="https://evilmartians.com/">
-<img src="https://camo.githubusercontent.com/608ad776fcb2da2b33f4f8265889cc5f1b8a6bad/68747470733a2f2f6576696c6d61727469616e732e636f6d2f6261646765732f73706f6e736f7265642d62792d6576696c2d6d61727469616e732e737667" alt="Sponsored by Evil Martians" width="319" height="72" data-canonical-src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" style="max-width:100%;margin: 0 auto;">
-</a>
-</div>
+===
+<p align="center"><a href="https://evilmartians.com/">
+<img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="319" height="72">
+</a></p>
