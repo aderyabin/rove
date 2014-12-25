@@ -1,4 +1,4 @@
-Rove.vagrant_settings :vm_params do
+Rove.vagrant_setting :vm_params do
 
   config do |cpus, memory|
     "config.vm.provider \"virtualbox\" do |vb|
